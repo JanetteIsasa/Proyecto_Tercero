@@ -1,0 +1,189 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/reportePeso.jpg); margin-top: 20px">
+            <div class="container">
+                <h2 class="display-4">TRAINING CENTER</h2>
+                <h3 class="display-4"> Gimnasio Issamar Fitness</h3>
+                <p class="lead"></p>
+                <hr class="my-2">
+                <p style="font-size: 27px;">Reporte de Clientes por sus Actividades</p>
+                <a href="http://127.0.0.1:5050/login/Reportes" class="btn btn-sm btn-info"> <img class="" src="../static/images/flecha-izquierda.png" alt=""> Volver a Reportes</a>
+              
+            </div>
+        
+        </div>
+        
+      </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <h4>Filtros</h4>
+                    <form action="{{url_for('reportesClientesActividades')}} " method="POST">
+                        <select class="form-control" name="id_actividad" >
+                            <option value="" disabled selected>Elija la actividad</option>
+                            {% for actividad in actividades %}
+                            <option value="{{actividad.0}}">{{actividad.1}} - {{actividad.2}} - {{actividad.3}} - {{actividad.4}}</option>
+                            {% endfor %}
+                        </select>
+                     
+                        <button type="submit" class="btn btn-primary mt-2">Aceptar</button>
+
+                    </form>
+
+                   
+                
+                </div>
+            </div>
+           
+
+        </div>
+
+    </div>
+</div>
+<!------------------------------------------- BOTON PARA VOLVER A LISTAR TODO----------------------------------->
+<div class="rox mt-2" >
+    
+       
+    <a href="http://127.0.0.1:5050/login/reportesClientesActividades" class="btn btn-block btn-primary"> Listar Todos los Registros</a>
+
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-reponsive">
+                    <table class="table table-md table-striped text-center" id="idDataTable" style="font-size: 15px;">
+                        <thead class="font-weight-bold">
+                            <tr>
+                               <th>Apellido</th>    
+                               <th>Nombre</th>    
+                               <th>Modalidad</th>    
+                               <th>Entrenador</th>    
+                               <th>Dia</th>    
+                               <th>Horario</th>    
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dato in datos %}
+                            <tr>
+                                <td >{{dato.1}}</td>
+                                <td >{{dato.0}}</td>
+                                <td >{{dato.2}}</td>
+                                <td>{{dato.3}}</td>
+                                <td >{{dato.4}}</td>
+                                <td >{{dato.5}}</td>
+                                
+                            </tr>
+        
+                            {% else%}
+        
+                            <tr class="text-center">
+                                <td colspan="4"> Increíble! No hay entradas aquí hasta ahora </td>
+                            </tr>
+        
+                            {% endfor %}
+                           
+                        </tbody>
+                       
+                    </table>
+               </div>
+        
+
+
+            </div>
+
+            
+         
+         
+        
+  
+        </div>
+  
+    </div>
+
+
+</div>
+                    
+                   
+                    
+                  
+
+<script>
+    $(document).ready(function() {
+    $('#idDataTable').DataTable( {
+  
+        language: {
+			"lengthMenu": "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar:",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Último",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"sProcessing": "Procesando...",
+		},
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'pdfHtml5',
+                download: 'open', //para abrir en el navegador
+                orientation: 'portrait', //vertical
+                pageSize: 'LETTER',
+                text: '<i class="fas fa-file-pdf"></i> ',
+				titleAttr: 'Exportar a PDF',
+                className: 'btn btn-danger',
+               //para agregar la imagen en el pdf
+               exportOptions: {
+                columns: ':visible',
+                    modifier: {
+                        page: 'current'
+                    }
+                },
+                customize: function ( doc ) {
+                    doc.content.splice( 0, 0, {
+                        margin: [ 0, 0, 0, 12 ],
+                        alignment: 'center',
+                        image: 'data:image/png;base64,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',
+                        
+                    } );
+                },
+                messageTop: 'Registro de Pesos ',
+                title: ' TRAINING CENTER                                                                                                         GIMNASIO ISSAMAR FITNESS                                                                                                       Reporte de Clientes'
+               
+            },
+
+            'colvis'
+                
+        ],
+        
+        columnDefs: [{
+        visible: false
+        }]
+        
+    } );
+} );
+</script>
+ 
+
+
+
+{% endblock %}
+
+
+
+
+

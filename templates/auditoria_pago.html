@@ -1,0 +1,99 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/AuditoriaPago.jpg); margin-top: 20px">
+          <div class="container">
+              <h1 class="display-4 text-center">Auditoria Pagos</h1>
+              <p class="lead"></p>
+             
+              
+              <a href="http://127.0.0.1:5050/login/index" class="btn btn-sm btn-info"> <img class="" src="../static/images/casa.png" alt=""></a>
+              
+          </div>
+      
+      </div>
+      
+    </div>
+  
+</div>
+
+<div class="row mx-auto">  
+    <div class="col-md-12 col-sm-12 col-lg-12 mx-auto">
+        <div class="card " style="margin-top: 20px;">
+            <div class="card-body ">
+                <div class="table-responsive">
+                    <table class=" table  table-hover table-striped text-center" id="TablaAuditoriaPago" style="width: 100%; font-size: 14px;">
+    
+                        <thead class="font-weight-bold ">
+                            <tr>
+                                <td>Usuario</td>
+                                <td>Fecha y Hora</td>
+                                <td>Tipo de Accion</td>
+                                <td>Cliente</td>
+                                <td>Fecha de Pago</td>
+                                <td>Fecha de Vencimiento</td>
+                                <td>Monto</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dato in auditoriaPagos %}
+                            <tr>
+                                <td>{{dato.0}}</td>
+                                <td>{{dato.1}}</td>
+                                <td>{{dato.2}}</td>
+                                <td>{{dato.3}}</td>
+                                <td>{{dato.4}}</td>
+                                <td>{{dato.5}}</td>
+                                <td>{{dato.6}}</td>
+                            
+                            </tr>
+                            {% else%}
+                            <tr >
+                                <td colspan="7"> Increíble! No hay entradas aquí hasta ahora </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot class="font-weight-bold ">
+                                <td>Usuario</td>
+                                <td>Fecha y Hora</td>
+                                <td>Tipo de Accion</td>
+                                <td>Cliente</td>
+                                <td>Fecha de Pago</td>
+                                <td>Fecha de Vencimiento</td>
+                                <td>Monto</td>
+                        </tfoot>
+                    </table>
+    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+$(document).ready(function () {
+	$('#TablaAuditoriaPago').DataTable({
+		language: {
+			"lengthMenu": "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar:",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Último",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"sProcessing": "Procesando...",
+		}
+    });
+});
+</script>
+
+{% endblock %}

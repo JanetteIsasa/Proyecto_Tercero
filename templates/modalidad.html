@@ -1,0 +1,257 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+<div>
+    {% with messages = get_flashed_messages()  %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/Modalidades.jpg); margin-top: 20px">
+          <div class="container">
+              <h1 class="display-4 text-center">Registro de Modalidades</h1>
+             
+          </div>
+      
+      </div>
+      
+    </div>
+  
+</div>
+<div class="row mx-auto">
+    <div class=" col-md-4 col-xl-4 col-sm-8 col-lg-4 mx-auto">
+        <div class="card  CajaModalidad"
+            style=" margin-top: 70px; border-radius: 5px;">
+
+
+            <div class="card-body" style="padding: 5px;">
+                <div class="col-md-13 equipo-img text-center">
+                    <img src="../static/images/modalidad.jpg" alt="">
+                </div>
+                <form action="{{url_for('crudModalidad')}}" id="formularioModalidad" method="POST">
+
+                    <div hidden>
+                        <div class="form-group" id="nom-grupo">
+                            <input class="form-control" type="text" name="id_modalidad" id="id_modalidad">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group" id="nom-grupo">
+                            <input class="form-control" type="text" placeholder="Nombre de la Modalidad"
+                                name="nombre_modalidad" id="nombre_modalidad" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row justify-content-center">
+                        <div>
+                            <button type="submit" class="btn btn-outline-primary mr-2" id="BtnGuardar">Guardar</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-outline-warning mr-2"
+                                id="BtnActualizar">Actualizar</button>
+                        </div>
+                        <div>
+                            <button type="reset" class="btn btn-outline-danger" id="BtnCancelar">Cancelar</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+<!----------------------------TABLA MODALIDADES ---------------------------------------->
+<div class=" col-md-7 col-sm-8 col-xl-7 col-lg-7 mx-auto" >
+
+    <div class="card cajaTablaEntrenadores" style=" margin-top: 60px;">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-responsive-md table-hover table-striped text-center" id="TablaModalidades" style="width: 100%; font-size: 14px;">
+                    <thead class=" font-weight-bold">
+                        <tr>
+                            <td>Nombre de la Modalidad</td>
+                            <td class="text-center">Acciones</td>
+                        </tr>
+                    </thead>
+
+                    <tfoot class="font-weight-bold">
+
+                        <td>Nombre de la Modalidad</td>
+                        <td class="text-center">Acciones</td>
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Eliminar Modalida -->
+<div class="modal fade" id="modalEliminarModalidad" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Eliminar Modalidad</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+
+            </div>
+            <form id="frmEliminarUsuario" action="{{url_for('deleteModalidad')}}">
+                <div class="modal-body">
+                    
+                        <input type="hidden" id="idModalidadEliminar" name="idModalidadE" >
+                        ¿Está seguro de eliminar esta modalidad?<strong data-name=""></strong>
+
+                   
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="submit" class="btn btn-primary mr-2" >Aceptar</button>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                   
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Eliminar Modalidad-->
+
+
+<script>
+    $(document).ready(function () {
+        var table = $('TablaModalidades').DataTable({
+            responsive: true
+
+        });
+
+
+
+
+        //Esconde el boton actualizar al empezar el formulario
+        $('#BtnActualizar').hide();
+
+        //Aprieta cancelar y le a aparece de nuevo para guarde y limpia el formulario
+        $("#BtnCancelar").click(function () {
+            $("#BtnGuardar").show();
+            $("#BtnActualizar").hide();
+
+            $('#formularioModalidad').trigger("reset");
+        });
+
+        // Tabla Modalidades
+        var TablaModalidades = function () {
+            var listadoModalidades = $('#TablaModalidades').DataTable({
+                "scrollY": "300px",
+                "scrollX": "200px",
+                "scrollCollapse": true,
+                "paging": true,
+                "ajax": "/login/Modalidad",
+                "columns": [
+                    { "data": "nombre_modalidad" },
+                    { "defaultContent": "<button type='button' class='editarModalidad btn btn-secondary text-center' style='font-size:11px'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarModalidad btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarModalidad' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+                ],
+                "language": idioma_espanol
+            });
+            /* Llamamos a la funcion y le pasamos la tabla y el nombre de la variable */
+            obtenerCamposModalidades("#TablaModalidades tbody", listadoModalidades);
+            eliminarModalidad("#TablaModalidades tbody", listadoModalidades);
+        }
+
+        /* Funcion para traer los datos de la Modalidad */
+        var obtenerCamposModalidades = function (tbody, table) {
+            $(tbody).on("click", "button.editarModalidad", function () {
+                /* La funcion parents trae los datos de las columnas anteriores a la misma */
+                var data = table.row($(this).parents("tr")).data();
+                /* Obtener los valores de los campos y agregarlos al formulario */
+                var id_modalidad = $("#id_modalidad").val(data.id_modalidad),
+                    nombre_modalidad = $("#nombre_modalidad").val(data.nombre_modalidad);
+
+                $('#BtnGuardar').hide();
+
+                $('#BtnActualizar').show();
+
+
+
+            });
+
+        }
+
+        /* Funcion para eliminar en el modal de la Modalidad */
+        var eliminarModalidad = function (tbody, table) {
+            $(tbody).on("click", "button.eliminarModalidad", function () {
+                /* La funcion parents trae los datos de las columnas anteriores a la misma */
+                var data = table.row($(this).parents("tr")).data();
+                /* Obtener los valores de los campos y agregarlos al formulario */
+                var id_modalidad = $("#idModalidadEliminar").val(data.id_modalidad);
+
+                /* Abrir modal */
+                $("#modalEliminarModalidad").toggleClass("show");
+            });
+        }
+
+
+
+
+
+        var idioma_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+
+        TablaModalidades();
+        eliminarModalidad();
+    });
+</script>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,146 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/PagarCuota.jpg); margin-top: 20px">
+        <div class="container">
+            <h1 class="display-4 text-center">Pagar Cuota</h1>
+            
+              
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="row mx-auto">
+    <div class="col-md-12">
+        <form action="{{url_for('guardarPago')}}"  method="POST">               
+        <div class="card"> 
+            <div class="card-body">
+                <div>
+                  <a href="http://127.0.0.1:5050/login/Pagos" class="btn btn-sm btn-info mb-2" > <img class="" src="../static/images/flecha-izquierda.png" alt=""> Volver a Pagos</a>
+                </div>
+                <div>
+                    <h5>Cliente: {{nombre}}</h5>
+                </div>
+                <div>
+                    <h5>Inscripciones: </h5>
+                </div>
+                <div class="table-reponsive">
+                    <table class="table table-md table-striped text-center" id="tablaPagos" style="font-size: 15px; width: 100%;">
+                        <thead class="font-weight-bold">
+                            <tr class="anchoTh">
+                             
+                                <th style="width: 130px;">Fecha Inscripcion</th> 
+                                 
+                                <th style="width: 130px;">Pagado Desde </th> 
+                                <th style="width: 130px;">Pagado Hasta</th> 
+                                <th style="width: 90px;">Total</th> 
+                                <th style="width: 240px;">Actividades</th> 
+                                <th style="width: 70px;">Pagar</th> 
+                              
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for dato in datos %}
+                          <tr>
+        
+                            
+                            <td>{{dato.1}}</td>
+                         
+                            <td>{{dato.3}}</td>
+                            <td>{{dato.4}}</td>
+                            <td>{{dato.5}}</td>
+                            <td>{{dato.6}}</td>
+                            <td> <div class="form-check">
+                                <input style="cursor: pointer; transform: scale(2.5);"  class="form-check-input" type="radio" name="id_inscripcion" id="exampleRadios1" value="{{dato.0}}" required>
+                              </div>
+                             
+                            </td>
+            
+                          </tr>
+                          {% else%}
+                          <tr class="text-center">
+                            <td colspan="5">No hay entradas aquí hasta ahora </td>
+                          </tr>
+                          {% endfor %}
+            
+                        </tbody>
+                        
+                        
+                    </table>
+               </div>
+        
+  
+  
+            </div>
+         
+         
+        
+  
+        </div>
+  
+    </div>
+  
+</div>
+    <div class="row mx-auto">
+
+        <div class="col-md-6 col-sm-12 mx-auto">
+          <div class="card " style=" margin-top: 70px; border-radius: 5px; font-size: 14px;">
+            <div class="card-header text-center">
+                <h4>Nuevo Pago</h4>
+
+
+            </div>
+            <div class="card-body">
+            
+              
+      
+                <label for="" class="col-form-label font-weight-bold">Cliente</label>
+                <div class="form-group" id="nom-grupo"  style="margin-bottom:0px" >
+                  <input class="form-control" value=" {{idCliente}}" id="idCliente" hidden>
+                  <input class="form-control" value=" {{nombre}}"  id="nombreCliente" disabled>
+                </div>
+
+                
+                <label for="" class="col-form-label font-weight-bold">Fecha de Pago</label>
+                <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+                    <input class="form-control" type="date" name="fecha_de_pago" id="" required>
+                </div>
+
+                <label for="" class="col-form-label font-weight-bold">Pagar Desde</label>
+                <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+                    <input class="form-control" type="date" name="pagar_desde" id="" required>
+                </div>
+
+                <label for="" class="col-form-label font-weight-bold">Pagar Hasta</label>
+                <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+                    <input class="form-control" type="date" name="pagar_hasta" id="" required>
+                </div>
+
+      
+                <div class="form-row justify-content-center">
+                  <div>
+                    <button type="submit" class="btn btn-outline-primary mr-2" id="btnGuardar">Aceptar</button>
+                  </div>
+                  <div>
+                    <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                  </div>
+                </div>
+      
+              </form>
+      
+            </div>
+          </div>
+      
+        </div>
+      </div>
+
+
+
+{% endblock %}

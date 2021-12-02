@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="columns ">
+    <div class="card " style="margin-left: 10px; margin-right: 20px; margin-top: 25px;">
+      <header class="card-header " style="margin: 10px;">
+        
+        <p class="card-header-title has-text-dark is-centered ">
+          <img class="imgTablaClientes" src="../static/images/lista.png">
+          Tabla de Clientes
+        </p>
+      </header>
+
+      <div class="card-content"">
+        <table class="table is-striped is-narrow  has-text-centered is-hoverable" id="tablaEjemplo">
+          <thead class="table is-bordered has-background-primary">
+            <tr>
+              <td class="has-text-white">Id</td>
+              <td class="has-text-white">Nombre</td>
+              <td class="has-text-white">Teléfono</td>
+              <td class="has-text-white">Email</td>
+              <td class="has-text-white">Acciones</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for contact in contacts %}
+            <tr>
+              <td>{{contact.0}}</td>
+              <td>{{contact.1}}</td>
+              <td>{{contact.2}}</td>
+              <td>{{contact.3}}</td>
+              <td>
+                <a href="/edit/{{contact.0}}" class="btn btn-secondary">
+                  <span class="fa fa-user-edit"></span>
+                </a>
+                <a href="/delete/{{contact.0}}" class="btn btn-danger btn-delete">
+                  <span class="fa fa-trash"></span>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+{% endblock %}

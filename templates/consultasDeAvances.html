@@ -1,0 +1,201 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/informe-investigacion-auditoria-electConsultaAvance.jpg); margin-top: 20px">
+          <div class="container">
+              <h1 class="display-4 text-center">Consulta de Avances</h1>
+              <p class="lead"></p>
+              <hr class="my-2">
+          </div>
+      
+      </div>
+      
+    </div>
+  
+  </div>
+<div class="row mx-auto">
+    <div class="col-md-4 col-sm-12">
+        <div class="card" style=" margin-top: 70px;padding: 5px; border-radius: 5px; font-size: 14px;">
+            <div class="card-body" style="padding: 5px;">
+                <div class="col-md-13 equipo-img text-center" style="margin-bottom: 0px;">
+                    <img src="../static/images/actividades.jpg" alt="">
+                </div>
+                <form  action="{{url_for('BuscarAvanceCliente')}}" method="POST">
+    
+                        <label for="" class="col-form-label">Cedula del Cliente</label>
+                        <div class="form-group" id="cedula-grupo" style="margin-bottom:0px">
+                            <input class="form-control" type="number" id="cedulaCliente" name="cedulaCliente">
+                        </div>
+    
+                        <label for="" class="col-form-label">Nombres y Apellidos</label>
+                        <div class="form-group" id="nom-grupo">
+                            <input class="form-control" value=" " id="idCliente" name="id_cliente" hidden>
+                            <input class="form-control" id="nombreCliente" disabled>
+    
+                        </div>
+    
+                    <div class="form-row justify-content-center">
+                        <div>
+                            <button type="submit" class="btn btn-outline-primary mr-2">Consultar</button>
+                        </div>
+                        <div>
+                            <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                        </div>
+                    </div>
+    
+                </form>
+    
+            </div>
+        </div>
+    
+    
+    
+    
+    </div>
+    
+    
+    
+    
+    <div class="col-md-8 col-sm-8 col-lg-8 mx-auto">
+        <div class="card " style="margin-top: 70px;">
+            <div class="card-body ">
+                <div class="table-responsive">
+                    <table class=" table  table-hover table-striped text-center" id="TablaConsultas" style="width: 100%; font-size: 14px;">
+    
+                        <thead class="font-weight-bold ">
+                            <tr>
+                                <td>Cliente</td>
+                                <td>Fecha de Pesaje</td>
+                                <td>Peso Anterior</td>
+                                <td>Diferencia </td>
+                                <td>Peso Actual</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for datoCliente in datos %}
+                            <tr>
+                                <td >{{datoCliente.0}} {{datoCliente.1}}</td>
+                                <td>{{datoCliente.2}}</td>
+                                <td >{{datoCliente.3}}</td>
+                                <td class="  font-weight-bold">{{datoCliente.5}}</td>
+                                <td >{{datoCliente.4}}</td>
+                            
+                            </tr>
+                            {% else%}
+                            <tr >
+                                <td colspan="5"> Increíble! No hay entradas aquí hasta ahora </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot class="font-weight-bold ">
+                            <td>Cliente</td>
+                            <td>Fecha de Pesaje</td>
+                            <td>Peso Anterior</td>
+                            <td>Diferencia </td>
+                            <td>Peso Actual</td>
+                        </tfoot>
+                    </table>
+    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    
+    
+
+
+
+<script>
+
+    //Buscar Clientes
+    $("#cedulaCliente").keyup(function () {
+        //Extraer el valor de la cedula del formulario
+        var cedula = $("#cedulaCliente").val();
+
+        //Mandar el valor para recibir u json desde flask
+        $.get("/getCliente?cedulaCliente=" + cedula, function (data) {
+            //Si hay datos, llenar los campos con los valores encontrados
+            if (data) {
+                $("#idCliente").val(data.idCliente);
+                $("#nombreCliente").val(data.nombreCliente + data.apellidoCliente);
+
+            }
+
+        });
+
+    });
+
+    
+ 
+    $(document).ready(function () {
+	$('#TablaConsultas').DataTable({
+		language: {
+			"lengthMenu": "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar:",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Último",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"sProcessing": "Procesando...",
+		},
+		
+        
+        "createdRow": function (row, data, consultasDeAvances) {
+            //pintar una celda
+            if (data[3] == 0) {
+                $('td', row).eq(3).css({
+                    'background-color': '#ccce09',
+                    'color': 'white',
+                });
+            }
+
+            if (data[3] < 0) {
+                $('td', row).eq(3).css({
+                    'background-color': '#0275d8',
+                    'color': 'white',
+                });
+
+            }
+
+            if (data[3] > 0) {
+                $('td', row).eq(3).css({
+                    'background-color': '#f03333',
+                    'color': 'white',
+                });
+
+            };
+
+        },
+	});
+	
+
+
+
+	
+
+	
+
+});
+
+    
+
+
+</script>
+
+
+{% endblock %}

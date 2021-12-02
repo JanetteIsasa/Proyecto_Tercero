@@ -1,0 +1,58 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="col-md-6 col-sm-8 mx-auto">
+    <div class="card" style="margin-top: 30px;" >
+        <div class="card-header text-center">
+            <h4> Detalles</h4>
+          </div>
+        <div class="card-body">
+            <!------------------------------------------TABLA DETALLES----------------------------------------->
+            <div class="col-md-12 col-sm-12 mx-auto">
+                    {% for dato in cantidad_y_cliente %}
+                    <h6>Cliente: {{dato.1}} </h6>
+                    <h6>Total Actividades: {{dato.0}} </h6>
+                    {% endfor %}
+
+                    <h6>Actividades Inscriptas: </h6>
+
+                    <div class="table-responsive">
+                    <table class="table table-hover table-striped text-center"  style="width: 100%; font-size: 14px;" id="TablaRegistroInscripciones">
+
+                        <thead class="font-weight-bold ">
+                        <tr>
+                            
+                            <td hidden>Id-Detalle-Inscripcion</td>
+                            <td>Modalidad - Entrenador - Dia - Horario</td>
+                         
+
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for detalles in actividades %}
+                                <tr>
+                                   
+                                    <td>{{detalles.3}}</td>
+                                </tr>
+    
+                            {% endfor %}
+                        </tbody>
+                        
+            
+                    </table>
+
+                    </div>
+
+            </div>
+            <div style="margin-top: 20px; font-size: 14px;"> 
+                <a href="http://127.0.0.1:5050/login/ListadoInscripciones" style=" background: #DC7633  ;" class="btn-block btn-sm btn-primary btn-lg disabled text-center" tabindex="-1" role="button" aria-disabled="true">Volver al Listado de Inscripciones</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

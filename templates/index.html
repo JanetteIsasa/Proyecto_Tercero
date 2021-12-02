@@ -1,0 +1,151 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+<div class="row" style="padding: 5px;">
+    <div class="col-lg-3 col-xs-6">
+
+        <div class="small-box bg-aqua" style="background-color:#EC407A">
+          {% if contador_clientes %}
+          <div class="inner">
+            
+            <h3>{{contador_clientes}}</h3>
+      
+            <p>Clientes</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="icon ion-person-stalker"></i>
+          
+          </div>
+          {% endif %}
+
+          <a href="http://127.0.0.1:5050/login/ClientePersonal" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+      
+        </div>
+      
+      </div>
+      
+      <div class="col-lg-3 col-xs-6" > 
+      
+        <div class="small-box" style="background-color: violet;">
+          
+          <div class="inner">
+          
+            <h3>5</h3>
+      
+            <p>Reportes</p>
+          
+          </div>
+          
+          <div class="icon">
+          
+            <i class="ion-stats-bars"></i>
+          
+          </div>
+          
+          <a href="http://127.0.0.1:5050/login/Reportes" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+      
+        </div>
+      
+      </div>
+      
+      <div class="col-lg-3 col-xs-6">
+      
+        <div class="small-box " style="background-color: cornflowerblue;">
+          {% if cant_modalidades %}
+          <div class="inner">
+          
+            <h3>{{cant_modalidades}}</h3>
+      
+            <p>Modalidades</p>
+        
+          </div>
+          
+          <div class="icon">
+          
+            <i class="fas fa-dumbbell" style="font-size: 70px;"></i>
+          
+          </div>
+          {% endif %}
+
+          <a href="http://127.0.0.1:5050/login/ModalidadInterfaz" class="small-box-footer">
+      
+            Más info <i class="fa fa-arrow-circle-right"></i>
+      
+          </a>
+      
+        </div>
+      
+      </div>
+      
+      <div class="col-lg-3 col-xs-6">
+      
+        <div class="small-box " style="background-color:#EC7063 ">
+        
+          <div class="inner">
+          
+            <h3>{{cant_pagos}}</h3>
+      
+            <p>Pagos</p>
+          
+          </div>
+          
+          <div class="icon">
+            
+            <i class="fa fa-calculator" style="font-size: 75px;"></i>
+          
+          </div>
+          
+          <a href="http://127.0.0.1:5050/login/Pagos" class="small-box-footer">
+            
+            Más info <i class="fa fa-arrow-circle-right"></i>
+          
+          </a>
+      
+        </div>
+      
+      </div>
+    </div>
+
+    
+    <div class="row mx-auto">
+      <div class="col-md-12">
+        <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/reporteFichaMedica.jpg); background-repeat: no-repeat; margin-top: 20px">
+            <div class="container">
+                <h2 class="display-4 text-center">AUDITORIAS</h2> 
+                <p class="lead"></p>
+                <hr class="my-2">
+                <p style="font-size: 27px;">Auditoria - Tabla Pagos</p>
+                <a href="http://127.0.0.1:5050/login/AuditoriaPagos" class="btn btn-sm btn-info font-weight-bold"> ENTRAR <img class="" src="../static/images/flecha-derecha.png" alt=""></a>
+                <p class="lead"></p>
+                <hr class="my-2">
+                <p style="font-size: 27px;">Auditoria - Tabla Inscripciones</p>
+                <a href="http://127.0.0.1:5050/login/AuditoriaInscripciones" class="btn btn-sm btn-info font-weight-bold"> ENTRAR <img class="" src="../static/images/flecha-derecha.png" alt=""></a>
+               
+            </div>
+        
+        </div>
+        
+      </div>
+    
+    </div> 
+
+    
+
+</div>
+
+
+
+
+
+
+{% endblock %}

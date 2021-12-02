@@ -1,0 +1,102 @@
+:root {
+  --primary:  #0f425ad2;
+  --light: #ffffff;
+  --grey: #efefef;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Muli', sans-serif;
+  font-weight: 300;
+  color: var(--primary);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.bg-primary { background-color: var(--primary) !important; }
+
+.bg-light { background-color: var(--light) !important; }
+
+.bg-grey { background-color: var(--grey) !important; }
+
+.bg-mix { background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0); }
+
+.btn-primary {
+  background-color: var(--primary);
+  border: 0;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary);
+}
+
+#sidebar-container {
+  min-height: 100vh;
+  background: #042331;
+}
+
+#sidebar-container header {
+  font-size: 22px;
+  color: white;
+  line-height: 70px;
+  text-align: center;
+  background: #063146;
+  user-select: none;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+#sidebar-container ul a{
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 40px;
+  font-size: 14px;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+  border-top: 1px solid rgba(255,255,255,.1);
+ 
+}
+
+ul{
+    list-style: none;
+      padding-left: 0px;
+}
+
+#sidebar-container ul a i{
+  margin-right: 16px;
+}
+#sidebar-container ul a svg{
+    margin-right: 16px;
+  }
+
+
+
+#content {
+  overflow-y: auto;
+  height: 100vh;
+  padding-bottom: 5rem;
+  background-image: url(../Fondos/fondo7.jpg);
+}
+
+
+
+.stat {
+  border-right: 1px solid var(--grey);
+}
+
+
+@media (max-width: 768px) {
+  #sidebar-container {
+    display: none;
+  }
+  .stat {
+      border: 0;
+  }
+}
+
+

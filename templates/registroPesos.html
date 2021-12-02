@@ -1,0 +1,323 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div>
+  {% with messages = get_flashed_messages()  %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/RegistroDePeso.jpg); margin-top: 20px">
+        <div class="container">
+            <h1 class="display-4 text-center">Registro de Pesos</h1>
+           
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+<div class="row mx-auto">
+
+  <div class="col-lg-4 col-sm-8 mx-auto" >
+
+
+    <div class="card" style=" margin-top: 70px; border-radius: 5px; font-size: 14px;">
+      <div class="card-body" >
+        <div class=" equipo-img text-center">
+          <img src="../static/images/actividades.jpg" alt="">
+        </div>
+        <form  action="{{url_for('guardarRegistroDePeso')}}" method="POST">
+            <div hidden>
+              <div class="form-group" id="nom-grupo">
+                  <input class="form-control" type="text" name="id_seguimiento" id="id_seguimiento">
+              </div>
+            </div>
+
+            <label for="" class="col-form-label">Cedula del Cliente</label>
+            <div class="form-group" id="cedula-grupo" style="margin-bottom:0px">
+              <input class="form-control" type="number" name="cedulaCliente" id="cedulaCliente">
+            </div>
+
+            <label for="" class="col-form-label">Nombres y Apellidos</label>
+            <div class="form-group" id="nom-grupo" style="margin-bottom:0px">
+              <input class="form-control" name="idCliente" value=" " id="idCliente" hidden>
+              <input class="form-control" id="nombreCliente" disabled>
+
+            </div>
+
+            <label for="" class="col-form-label">Peso Anterior</label>
+            <div class="form-group" id="peso-grupo" style="margin-bottom:0px">
+              <input class="form-control" id="pesoAnterior" name="pesoAnterior" disabled>
+
+            </div>
+
+            <label for="" class="col-form-label">Fecha de Pesaje</label>
+            <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+              <input class="form-control" type="date" name="fecha_seguimiento" required>
+            </div>
+
+            <label for="" class="col-form-label">Peso Actual</label>
+            <div class="form-group" id="peso-grupo">
+              <input class="form-control" type="number" step="0.01" min="0" name="pesaje_seguimiento">
+            </div>
+
+          <div class="form-row justify-content-center">
+            <div>
+              <button type="submit" class="btn btn-outline-primary mr-2">Guardar</button>
+            </div>
+            <div>
+              <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+<!--------------------------------------TABLA DE REGISTRO DE PESOS --------------------------------------------->
+  <div class="col-lg-8 col-sm-8 mx-auto ">
+    <div class="card" style="margin-top: 70px;">
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class=" table  table-hover table-striped text-center" id="TablaRegistroPesos" style="width: 100%; font-size: 14px;">
+            <thead class="  font-weight-bold">
+              <tr>
+                <td class=" td ">Nombre</td>
+                <td class=" td ">Apellido</td>
+                <td class=" td ">Fecha</td>
+                <td class=" td ">Peso Actual</td>
+                <td class=" td ">Diferencia</td>
+                <td class=" td ">Acciones</td>
+              </tr>
+            </thead>
+  
+            <tfoot class=" font-weight-bold">
+              <td class=" td ">Nombre</td>
+              <td class=" td ">Apellido</td>
+              <td class=" td ">Fecha</td>
+              <td class=" td ">Peso Actual</td>
+              <td class=" td ">Diferencia</td>
+              <td class=" td ">Acciones</td>
+            </tfoot>
+          </table>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!--------------------------------------MODAL EDITAR REGISTRO DE PESOS --------------------------------------------->
+<div class="modal fade" id="modalEditarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Editar Registro de Peso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form  action="{{url_for('actualizarRegistroDePeso')}}" method="POST">
+
+            <div class="col-13">
+              <div class="form-group" id="nom-grupo" hidden>
+                <input class="form-control"  id="idSeguimientoE" name="id_seguimiento">
+              </div>
+              <div class="form-group" id="nom-grupo" hidden>
+                <input class="form-control"  id="idClienteSeguimientoE" name="idCliente">
+              </div>
+
+              <label for="" class="col-form-label">Nombre</label>
+              <div class="form-group" id="nom-grupo">
+                <input disabled class="form-control" type="text" placeholder="Nombre" id="nombreClienteSeguimientoE"name="id_cliente">
+              </div>
+              <label for="" class="col-form-label">Apellido</label>
+              <div class="form-group" id="nom-grupo">
+                <input disabled class="form-control" type="text" placeholder="Apellido" id="apellidoClienteSeguimientoE">
+              </div>
+
+              <label for="" class="col-form-label">Fecha de Pesaje</label>
+              <div class="form-group" id="calendario-grupo">
+                <input class="form-control" type="date" placeholder="Fecha de Pesaje" id="fechaSeguimientoE" name="fecha_seguimiento">
+              </div>
+
+              <label for="" class="col-form-label">Peso Actual</label>
+              <div class="form-group" id="peso-grupo">
+                <input class="form-control" type="number" placeholder="Peso Actual" id="pesajeSeguimientoE" name="pesaje_seguimiento">
+              </div>
+
+              <label for="" class="col-form-label">Diferencia</label>
+              <div class="form-group" id="peso-grupo" >
+                <input class="form-control" type="number" id="diferenciaPesajeE" disabled>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Eliminar Entrenador-->
+<div class="modal fade" id="modalEliminarRegistro" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Eliminar Registro</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+
+      </div>
+      <form  >
+        <div class="modal-body"> 
+          No se puede eliminar este registro porque contiene datos activos de otra tabla<strong data-name=""></strong>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary mr-2" data-dismiss="modal">Aceptar</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+
+
+
+
+<script>
+
+
+
+  //Buscar Clientes
+  $("#cedulaCliente").keyup(function () {
+    //Extraer el valor de la cedula del formulario
+    var cedula = $("#cedulaCliente").val();
+
+    //Mandar el valor para recibir u json desde flask
+    $.get("/getCliente?cedulaCliente=" + cedula, function (data) {
+      //Si hay datos, llenar los campos con los valores encontrados
+      if (data) {
+        $("#idCliente").val(data.idCliente);
+        $("#nombreCliente").val(data.nombreCliente + data.apellidoCliente);
+        $("#pesoAnterior").val(data.pesoAnterior);
+
+      }
+
+    });
+
+  });
+
+  //Cambiar el color de la celda dependiendo si bajo, mantuvo o subió de peso
+  $(document).ready(function () {
+    // Tabla Registro de Pesos
+    var TablaRegistroPesos = function () {
+      var listadoRegistros = $('#TablaRegistroPesos').DataTable({
+        "scrollY": "300px",
+        "scrollX": "200px",
+        "scrollCollapse": true,
+        "paging": true,
+        "ajax": "/login/getRegistroPesos",
+        "columns": [
+          { "data": "nombre_cliente_seguimiento" },
+          { "data": "apellido_cliente_seguimiento" },
+          { "data": "fecha_formateado" },
+          { "data": "pesaje_seguimiento" },
+          { "data": "diferencia_pesaje" },
+          { "defaultContent": "<button type='button' class='editarRegistro btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditarRegistro'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarRegistro btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarRegistro' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+        ],
+        "language": idioma_espanol
+      });
+      /* Llamamos a la funcion y le pasamos la tabla y el nombre de la variable */
+      obtenerCamposRegistros("#TablaRegistroPesos tbody", listadoRegistros);
+     // eliminarEntrenador("#TablaRegistroPesos tbody", listadoRegistros);
+    }
+
+    /* Funcion para traer los datos del Entrenador*/
+    var obtenerCamposRegistros= function (tbody, table) {
+      $(tbody).on("click", "button.editarRegistro", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+        var data = table.row($(this).parents("tr")).data();
+       
+        /* Obtener los valores de los campos y agregarlos al formulario */
+        var id_seguimiento = $("#idSeguimientoE").val(data.id_seguimiento),
+          id_cliente = $("#idClienteSeguimientoE").val(data.id_cliente),
+          nombre_cliente_seguimiento = $("#nombreClienteSeguimientoE").val(data.nombre_cliente_seguimiento),
+          apellido_cliente_seguimiento = $("#apellidoClienteSeguimientoE").val(data.apellido_cliente_seguimiento),
+          fecha_seguimiento = $("#fechaSeguimientoE").val(data.fecha_seguimiento);
+          pesaje_seguimiento = $("#pesajeSeguimientoE").val(data.pesaje_seguimiento);
+          diferencia_pesaje = $("#diferenciaPesajeE").val(data.diferencia_pesaje);
+        
+
+        /* Abrir modal */
+        $("#modalEditarRegistro").toggleClass("show");
+
+      });
+
+    }
+
+
+
+    var idioma_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    
+    TablaRegistroPesos();
+
+
+  });
+</script>
+
+
+
+
+{% endblock %}

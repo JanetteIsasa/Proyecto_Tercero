@@ -1,0 +1,335 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div>
+  {% with messages = get_flashed_messages()  %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/Entrenadores.jpg); margin-top: 20px">
+        <div class="container">
+            <h1 class="display-4 text-center">Registro de Entrenadores</h1>
+           
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+<div class="row mx-auto">
+
+  <div class=" col-sm-8 col-xl-4 mx-auto">
+
+    <div class="card "
+      style=" margin-top: 70px;padding: 5px; border-radius: 5px;">
+
+
+      <div class="card-body" style="padding: 5px;">
+        <div class="col-md-13 equipo-img text-center">
+          <img src="../static/images/equipo.png" alt="">
+        </div>
+        <form class="col-md-13" action="{{url_for('crudEntrenador')}}" method="POST">
+
+          <div hidden>
+            <div class="form-group" id="nom-grupo">
+              <input class="form-control" type="text" name="id_entrenador" id="id_entrenador">
+            </div>
+          </div>
+
+        
+            <div class="form-group " id="nom-grupo">
+              <input class="form-control " type="text" placeholder="Nombre y Apellido" name="nombre_entrenador" required>
+            </div>
+            <div class="form-group" id="cedula-grupo">
+              <input class="form-control" type="number" placeholder="Cedula" name="cedula_entrenador" required>
+            </div>
+            <div class="form-group" id="nom-grupo">
+              <input class="form-control"  type="number" placeholder="Edad"  name="edad_entrenador" required>
+            </div>
+            <div class="form-group" id="tel-grupo">
+              <input class="form-control" id="phone" type="text" placeholder="Telefono" name="telefono_entrenador" required>
+            </div>
+            <div class="form-group" id="email-grupo">
+              <input class="form-control" type="email" placeholder="Email" name="email_entrenador" required>
+            </div>
+
+            <div class="form-group" id="direccion-grupo">
+              <input class="form-control" type="text" placeholder="Dirección" name="direccion_entrenador" required>
+            </div>
+
+          <div class="form-row justify-content-center">
+            <div>
+              <button type="submit" class="btn btn-outline-primary mr-2">Guardar</button>
+            </div>
+            <div>
+              <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!------------------------------------- TABLA ENTRENADORES -------------------------->
+  <div class=" col-sm-8 col-xl-8 mx-auto" >
+   
+      <div class="card" style="margin-top: 70px;">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class=" table table-hover table-striped  display nowrap" cellspacing="0" id="TablaEntrenadores"
+            style="width: 100%; font-size: 14px;">
+            <thead class=" text-capitalize font-weight-bold">
+              <tr>
+                <td >Nombre</td>
+                <td >Cedula</td>
+                <td >Edad</td>
+                <td >Teléfono</td>
+                <td >Email</td>
+                <td >Dirección</td>
+                <td >Acciones</td>
+              </tr>
+            </thead>
+
+            <tfoot class="font-weight-bold">
+              <td >Nombre</td>
+              <td >Cedula</td>
+              <td >Edad</td>
+              <td >Teléfono</td>
+              <td >Email</td>
+              <td >Dirección</td>
+              <td >Acciones</td>
+
+            </tfoot>
+            </tbody>
+          </table>
+
+          </div>
+          
+        </div>
+      </div>
+    
+
+  </div>
+
+
+  <!------------------------------------- Modal Editar Entrenadores -------------------------->
+  <div class="modal fade" id="modalEditarEntrenador" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Editar Entrenenador</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{{url_for('crudEntrenador')}}" method="POST">
+
+            <div class="col-13">
+              <div class="form-group" id="nom-grupo">
+                <input class="form-control" type="hidden" id="idEntrenadorE" name="id_entrenador">
+              </div>
+              <div class="form-group" id="nom-grupo">
+                <input class="form-control" type="text" placeholder="Nombre y Apellido" id="nombreEntrenadorE"
+                  name="nombre_entrenador">
+              </div>
+              <div class="form-group" id="cedula-grupo">
+                <input class="form-control" type="number" placeholder="Cedula" id="cedulaEntrenadorE"
+                  name="cedula_entrenador">
+              </div>
+              <div class="form-group" id="nom-grupo">
+                <input class="form-control"  type="number" placeholder="Edad" id="edadE"
+                  name="edad_entrenador">
+              </div>
+              <div class="form-group" id="tel-grupo">
+                <input class="form-control"  type="text" placeholder="Telefono" id="telefonoEntrenadorE"
+                  name="telefono_entrenador">
+              </div>
+              <div class="form-group" id="email-grupo">
+                <input class="form-control" type="email" placeholder="Email" id="emailEntrenadorE"
+                  name="email_entrenador">
+              </div>
+              <div class="form-group" id="direccion-grupo">
+                <input class="form-control" type="text" placeholder="Dirección" id="direccionEntrenadorE"
+                  name="direccion_entrenador">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ----------------------------------Modal Eliminar Entrenador------------------------------->
+  <div class="modal fade" id="modalEliminarEntrenador" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Eliminar Entrenador</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+
+        </div>
+        <form id="frmEliminarEntrenador" action="{{url_for('deleteEntrenador')}}">
+          <div class="modal-body">
+
+            <input type="hidden" id="idEntrenadorEliminar" name="idEntrenadorEliminar">
+            ¿Está seguro de eliminar este Entrenador?<strong data-name=""></strong>
+
+
+          </div>
+          <div class="modal-footer">
+            <div>
+              <button type="submit" class="btn btn-primary mr-2">Aceptar</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+
+</div>
+
+<script>
+  
+  $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#phone").mask("(9999) 999 999");
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
+
+  $(document).ready(function () {
+    var table = $('TablaEntrenadores').DataTable({
+      responsive: true
+
+    });
+
+    // Tabla Entrenadores
+    var TablaEntrenadores = function () {
+      var listadoEntrenadores = $('#TablaEntrenadores').DataTable({
+        "scrollY": "300px",
+        "scrollX": "200px",
+        "scrollCollapse": true,
+        "paging": true,
+        "ajax": "/login/getEntrenadores",
+        "columns": [
+          { "data": "nombre_entrenador" },
+          { "data": "cedula_entrenador" },
+          { "data": "edad_entrenador" },
+          { "data": "telefono_entrenador" },
+          { "data": "email_entrenador" },
+          { "data": "direccion_entrenador" },
+          { "defaultContent": "<button type='button' class='editarEntrenador btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditarEntrenador'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarEntrenador btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarEntrenador' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+        ],
+        "language": idioma_espanol
+      });
+      /* Llamamos a la funcion y le pasamos la tabla y el nombre de la variable */
+      obtenerCamposEntrenadores("#TablaEntrenadores tbody", listadoEntrenadores);
+      eliminarEntrenador("#TablaEntrenadores tbody", listadoEntrenadores);
+    }
+
+    /* Funcion para traer los datos del Entrenador*/
+    var obtenerCamposEntrenadores = function (tbody, table) {
+      $(tbody).on("click", "button.editarEntrenador", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+        var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+        var id_entrenador = $("#idEntrenadorE").val(data.id_entrenador),
+          nombre_entrenador = $("#nombreEntrenadorE").val(data.nombre_entrenador),
+          cedula_entrenador = $("#cedulaEntrenadorE").val(data.cedula_entrenador),
+          edad_entrenador = $("#edadE").val(data.edad_entrenador),
+          telefono_entrenador = $("#telefonoEntrenadorE").val(data.telefono_entrenador),
+          email_entrenador = $("#emailEntrenadorE").val(data.email_entrenador),
+          direccion_entrenador = $("#direccionEntrenadorE").val(data.direccion_entrenador);
+
+
+        /* Abrir modal */
+        $("#modalEditarEntrenador").toggleClass("show");
+
+      });
+
+    }
+
+
+    /* Funcion para eliminar en el modal del Entrenador*/
+    var eliminarEntrenador = function (tbody, table) {
+      $(tbody).on("click", "button.eliminarEntrenador", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+        var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+        var id_entrenador = $("#idEntrenadorEliminar").val(data.id_entrenador);
+
+        /* Abrir modal */
+        $("#modalEliminarEntrenador").toggleClass("show");
+      });
+    }
+
+
+
+
+
+    var idioma_espanol = {
+      "sProcessing": "Procesando...",
+      "sLengthMenu": "Mostrar _MENU_ registros",
+      "sZeroRecords": "No se encontraron resultados",
+      "sEmptyTable": "Ningún dato disponible en esta tabla",
+      "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix": "",
+      "sSearch": "Buscar:",
+      "sUrl": "",
+      "sInfoThousands": ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    }
+
+    TablaEntrenadores();
+   
+    eliminarEntrenador();
+  });
+</script>
+
+
+
+{% endblock %}

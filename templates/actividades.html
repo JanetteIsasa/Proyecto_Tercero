@@ -1,0 +1,337 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div>
+  {% with messages = get_flashed_messages()  %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/Modalidades.jpg); margin-top: 20px">
+        <div class="container">
+            <h1 class="display-4 text-center">Registro de Actividades</h1>
+           
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+<div class="row mx-auto">
+  <!--------------------------------------- FORMULARIO PARA INGRESAR LAS ACTIVIDADES -------------------------------------->
+ 
+
+  <div class="col-md-4 col-sm-8 col-xl-4 mx-auto">
+
+
+    <div class="card " style=" margin-top: 70px; border-radius: 5px;  font-size: 14px;">
+      <div class="card-body" >
+        <div class="col-13 equipo-img text-center">
+          <img src="../static/images/actividades.jpg" alt="">
+        </div>
+        <form  action="{{url_for('crudActividades')}}" method="POST">
+
+            <div hidden>
+              <div class="form-group" id="nom-grupo">
+                  <input class="form-control" type="text" name="id_actividades" >
+              </div>
+            </div>
+
+            <label for="" class="col-form-label">Modalidad</label>
+            <select class="form-control" name="tipo_modalidad" required>
+              <option value="" disabled selected>Elija la modalidad</option>
+              {% for modalidad in modalidades %}
+              <option value="{{modalidad.0}}">{{modalidad.1}}</option>
+              {% endfor %}
+            </select>
+
+            <label for="" class="col-form-label">Entrenador</label>
+            <select class="form-control" name="nom_entrenador" required >
+              <option value="" disabled selected>Elija el entrenador</option>
+              {% for entrenador in entrenadores %}
+              <option value="{{entrenador.0}}">{{entrenador.1}}</option>
+              {% endfor %}
+            </select>
+
+            <label for="" class="col-form-label">Dia</label>
+            <select class="form-control" name="dia_actividad" required>
+              <option value="" disabled selected>Elija el dia a entrenar</option>
+              <option value="Lunes">Lunes</option>
+              <option value="Martes">Martes</option>
+              <option value="Miercoles">Miercoles</option>
+              <option value="Jueves">Jueves</option>
+              <option value="Viernes">Viernes</option>
+              <option value="Sabado">Sabado</option>
+            </select>
+
+            <label for="" class="col-form-label">Horario</label>
+            <div class="form-group">
+              <input class="form-control" type="time" name="horario_actividad" required>
+            </div>
+
+          <div class="form-row justify-content-center">
+            <div>
+              <button type="submit" class="btn btn-outline-primary mr-2">Guardar</button>
+            </div>
+            <div>
+              <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+   <!--------------------------------------- TABLA ACTIVIDADES -------------------------------------->
+  <div class="col-md-8 col-xl-8 col-sm-8 mx-auto px-auto " style="margin-top: 70px;">
+    <div
+      class="card" >
+   
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class=" table  table-hover table-striped text-center" id="TablaActividades" style="width: 100%;  font-size: 14px;">
+            <thead class=" text-capitalize font-weight-bold ">
+              <tr>
+                <td class=" td ">Modalidad</td>
+                <td class=" td ">Entrenador</td>
+                <td class=" td ">Dia</td>
+                <td class=" td ">Horario</td>
+                <td class=" td ">Acciones</td>
+              </tr>
+            </thead>
+      
+            <tfoot class="font-weight-bold">
+              <td class=" td ">Modalidad</td>
+              <td class=" td ">Entrenador</td>
+              <td class=" td ">Dia</td>
+              <td class=" td ">Horario</td>
+              <td class=" td ">Acciones</td>
+  
+            </tfoot>
+            </tbody>
+          </table>
+
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<!------------------------------------- MODAL EDITAR ACTIVIDADES-------------------------->
+<div class="modal fade" id="modalEditarActividades" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title text-center" id="exampleModalLabel">Editar Actividad</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="{{url_for('crudActividades')}}" method="POST">
+          <div hidden>
+            <div class="form-group" id="nom-grupo" >
+                <input class="form-control" type="text" name="id_actividades" id="idActividad">
+            </div>
+          </div>
+
+          <label for="" class="col-form-label">Modalidad</label>
+            <select class="form-control" name="tipo_modalidad" id="nombreModalidadActividad" >
+              <option value="" disabled selected>Elija la modalidad</option>
+              {% for modalidad in modalidades %}
+              <option value="{{modalidad.0}}">{{modalidad.1}}</option>
+              {% endfor %}
+            </select>
+
+            <label for="" class="col-form-label">Entrenador</label>
+            <select class="form-control" name="nom_entrenador" id="nombreEntrenadorActividad">
+              <option value="" disabled selected>Elija el entrenador</option>
+              {% for entrenador in entrenadores %}
+              <option value="{{entrenador.0}}">{{entrenador.1}}</option>
+              {% endfor %}
+            </select>
+
+            <label for="" class="col-form-label">Dia</label>
+            <select class="form-control" name="dia_actividad" id="diaActividadE">
+              <option value="" disabled selected>Elija el dia </option>
+              <option value="Lunes">Lunes</option>
+              <option value="Martes">Martes</option>
+              <option value="Miercoles">Miercoles</option>
+              <option value="Jueves">Jueves</option>
+              <option value="Viernes">Viernes</option>
+              <option value="Sabado">Sabado</option>
+            </select>
+
+            <label for="" class="col-form-label">Horario</label>
+            <div class="form-group"  id="horario-grupo">
+              <input class="form-control" type="time" name="horario_actividad" id="horarioActividadE">
+            </div>
+       
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-------------------------- MODAL ELIMINAR ACTIVIDADES------------------------------------->
+<div class="modal fade" id="modalEliminarActividad" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Eliminar Actividad</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+
+          </div>
+          <form id="frmEliminarUsuario" action="{{url_for('deleteActividad')}}">
+              <div class="modal-body">      
+                      <input type="" id="idActividadEliminar" name="id_actividades" hidden>
+                      ¿Está seguro de eliminar esta actividad?<strong data-name=""></strong>    
+              </div>
+              <div class="modal-footer">
+                  <div>
+                      <button type="submit" class="btn btn-primary mr-2" >Aceptar</button>
+                  </div>
+                  <div>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+                 
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!------------------------- MODAL ELIMINAR ACTIVIDADES------------------------------------->
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    var table = $('TablaActividades').DataTable({
+      responsive: true
+
+    });
+
+    // Tabla Actividades
+    var TablaActividades = function () {
+      var listadoActividades = $('#TablaActividades').DataTable({
+        "scrollY": "300px",
+        "scrollX": "200px",
+        "scrollCollapse": true,
+        "paging": true,
+        "ajax": "/login/getActividades",
+        "columns": [
+          { "data": "nombre_modalidad" },
+          { "data": "nombre_entrenador" },
+          { "data": "dia_actividad" },
+          { "data": "horario_actividad" },
+          { "defaultContent": "<button type='button' class='editarActividad btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditarActividades'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarActividad btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarActividad' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+        ],
+        "language": idioma_espanol
+      });
+      /* Llamamos a la funcion y le pasamos la tabla y el nombre de la variable */
+      obtenerCamposActividades("#TablaActividades tbody", listadoActividades);
+      eliminarActividad("#TablaActividades tbody", listadoActividades);
+    }
+
+    /* Funcion para traer los datos del Entrenador*/
+    var obtenerCamposActividades = function (tbody, table) {
+      $(tbody).on("click", "button.editarActividad", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+       var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+       var id_actividad = $("#idActividad").val(data.id_actividad),
+          id_modalidad = $("#nombreModalidadActividad").val(data.id_modalidad),
+          id_entrenador = $("#nombreEntrenadorActividad").val(data.id_entrenador),
+          dia_actividad = $("#diaActividadE").val(data.dia_actividad),
+          horario_actividad = $("#horarioActividadE").val(data.horario_actividad);
+         
+
+        /* Abrir modal */
+       $("#modalEditarActividades").toggleClass("show");
+
+      });
+
+    }
+
+    
+
+
+    /* Funcion para eliminar en el modal del Entrenador*/
+    var eliminarActividad = function (tbody, table) {
+      $(tbody).on("click", "button.eliminarActividad", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+        var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+        var id_actividad = $("#idActividadEliminar").val(data.id_actividad);
+       
+        /* Abrir modal */
+        $("#modalEliminarActividad").toggleClass("show");
+      });
+    }
+
+
+
+
+
+    var idioma_espanol = {
+      "sProcessing": "Procesando...",
+      "sLengthMenu": "Mostrar _MENU_ registros",
+      "sZeroRecords": "No se encontraron resultados",
+      "sEmptyTable": "Ningún dato disponible en esta tabla",
+      "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+      "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+      "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+      "sInfoPostFix": "",
+      "sSearch": "Buscar:",
+      "sUrl": "",
+      "sInfoThousands": ",",
+      "sLoadingRecords": "Cargando...",
+      "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+      },
+      "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+      }
+    }
+
+    TablaActividades();
+
+  });
+
+</script>
+
+
+
+
+{% endblock %}

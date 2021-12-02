@@ -1,0 +1,72 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/contenido-reportes.png); margin-top: 20px">
+        <div class="container">
+            <h1 class="display-4">TRAINING CENTER</h1>
+            <h2 class="display-4"> Gimnasio Issamar Fitness</h2>
+            <p class="lead"></p>
+            <hr class="my-2">
+            <p style="font-size: 27px;">Reportes</p>
+        </div>
+    
+    </div>
+    
+  </div>
+
+</div>
+
+<div id="tarjetasReportes" class="row mx-auto">
+    <div class="col-md-12 col-lg-4 col-sm-12 mx-auto"> 
+      <div class="caja1" style="margin-top: 20px;"> 
+          <a href="http://127.0.0.1:5050/login/reporteCliente" class="btn btn-lg col-12"   tabindex="-1" role="button" aria-disabled="true">
+            
+            <img src="../static/images/reporteCliente.png" alt=""><h5>Reportes de Clientes - Datos Personales</h5></a>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-4 col-sm-12 "> 
+      <div class="caja1"  style="margin-top: 20px;"> 
+          <a href="http://127.0.0.1:5050/login/reporteClienteFichaMedica" class="btn btn-lg col-12"   tabindex="-1" role="button" aria-disabled="true">
+            
+            <img src="../static/images/fichaMedica.png" alt=""><h5>Reporte de Clientes con su Ficha Medica</h5></a>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-4 col-sm-12 "> 
+      <div class="caja1" style="margin-top: 20px;"> 
+          <a href="http://127.0.0.1:5050/login/reportesClientesActividades" class="btn btn-lg col-12"   tabindex="-1" role="button" aria-disabled="true">
+            <img src="../static/images/reporteActividades.png" alt=""><h5>Reportes de Clientes con sus Actividades </h5></a>
+      </div>
+    </div>
+
+
+
+</div>
+
+
+
+<div id="tarjetasReportes" class="row mx-auto">
+  <div class="col-md-12 col-lg-4 col-sm-12"> 
+    <div class="caja1" style="margin-top: 20px;"> 
+        <a href="http://127.0.0.1:5050/login/reporteRegistroDePesos" class="btn btn-lg col-12"  tabindex="-1" role="button" aria-disabled="true"> 
+          <img src="../static/images/registroPeso.png" alt=""> <h5>Reportes de Registro de Pesos</h5></a>
+    </div>
+  </div>
+
+    <div class="col-md-12 col-lg-4 col-sm-12 "> 
+      <div class="caja1" style="margin-top: 20px;"> 
+          <a href="http://127.0.0.1:5050/login/reportePagos" class="btn btn-lg col-12"  tabindex="-1" role="button" aria-disabled="true">
+            <img src="../static/images/reporPagos.png" alt="">  <h5>Reportes de Pagos </h5></a>
+      </div>
+    </div>
+
+</div>
+
+
+
+
+
+{% endblock %}

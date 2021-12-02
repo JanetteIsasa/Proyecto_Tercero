@@ -1,0 +1,263 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div>
+    {% with messages = get_flashed_messages()  %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </div>
+
+  <div class="rox mx-auto">
+    <div class=" col-sm-8 col-xl-4 mx-auto">
+
+        <div class="card " style=" margin-top: 70px;padding: 5px; border-radius: 5px;">
+          <div class="card-header text-center ">
+            <h4>Agregar Usuario</h4>
+
+          </div>
+    
+          <div class="card-body" style="padding: 5px;">
+            
+            <form  action="{{url_for('guardarUsuario')}}" method="POST">
+    
+              <div hidden>
+                <div class="form-group" id="nom-grupo">
+                  <input class="form-control" type="text" name="id_usuario" id="idUsuario">
+                </div>
+              </div>
+    
+            
+                <div class="form-group " id="nom-grupo">
+                  <input class="form-control " type="text" placeholder="Nombre de Usuario" name="nombre_usuario">
+                </div>
+
+                <div class="form-group" id="candado-grupo">
+                  <input class="form-control" type="password" placeholder="Contraseña" name="contraseña">
+                </div>
+               
+    
+              <div class="form-row justify-content-center">
+                <div>
+                  <button type="submit" class="btn btn-outline-primary mr-2">Guardar</button>
+                </div>
+                <div>
+                  <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                </div>
+              </div>
+    
+            </form>
+    
+          </div>
+        </div>
+    
+      </div>
+  </div>
+
+   <!------------------------------------------TABLA DE CLIENTES----------------------------------------->
+  <div class="col-md-6 col-sm-6 mx-auto" style="padding-top: 70px;">
+    <div class="card ">
+      <div class="card-header text-center shadow p-3 bg-white rounded d-flex">
+         <h4 class="mx-auto">Usuarios Registrados</h4>
+      </div>
+      <div class="card-body ">
+        <div class="table-responsive text-center">
+          <table class="table table-hover table-striped text-center"  style="width: 100%; font-size: 14px;" id="TablaUsuario">
+
+            <thead class="font-weight-bold ">
+              <tr>
+                <td>Usuario</td>     
+                <td>Acciones</td>
+
+              </tr>
+            </thead>
+ 
+            <tfoot class="font-weight-bold ">
+              <tr>      
+                <td>Usuario</td>
+                <td>Acciones</td>
+               
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------------------------- MODAL EDITAR USUARIO-------------------------->
+<div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title text-center" id="exampleModalLabel">Editar Usuario</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="{{url_for('actualizarUsuario')}}" method="POST">
+          <div hidden>
+            <div class="form-group" id="nom-grupo">
+                <input class="form-control" type="text" name="id_usuario" id="idUsuarioE">
+            </div>
+          </div>
+          
+          <div class="form-group " id="nom-grupo">
+            <input class="form-control " type="text" placeholder="Nombre de Usuario" name="nombre_usuario" id="nombreUsuarioE">
+          </div>
+
+          <div class="form-group" id="candado-grupo">
+            <input class="form-control" type="password" placeholder="Contraseña Anterior" name="contrasenaAnterior" id="contrasenaAnterior">
+          </div>
+
+          <div class="form-group" id="candado-grupo">
+            <input class="form-control" type="password" placeholder="Contraseña Actual" name="contrasenaActual" id="contrasenaActual">
+          </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!---------------------------------- MODAL ELIMINAR INSCRIPCION ----------------------------------->
+<div class="modal fade" id="modalEliminarUsuario" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Eliminar Usuario</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+
+          </div>
+          <form id="frmEliminarUsuario" action="{{url_for('deleteUsuario')}}" method="POST">
+              <div class="modal-body">
+                  
+                      <input id="idUsuarioEliminar" name="id_usuario" hidden>
+                       Para eliminar este usuario debe introducir primero la contraseña anterior<strong data-name=""></strong>
+
+                      <div class="form-group" id="candado-grupo">
+                        <input class="form-control" type="password" placeholder="Contraseña Anterior" name="contrasenaAnterior" id="contrasenaAnterior">
+                      </div>
+
+                 
+              </div>
+              <div class="modal-footer">
+                  <div>
+                      <button type="submit" class="btn btn-outline-primary" >Aceptar</button>
+                  </div>
+                  <div>
+                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+                 
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!----------------------------------- MODAL ELIMINAR INSCRIPCION------------------------------------->
+
+
+<script>
+      $(document).ready(function () {
+      // Tabla Lisato de usuarios
+      var TablaUsuario = function () {
+          var listadoUsuarios = $('#TablaUsuario').DataTable({
+              "scrollY": "300px",
+              "scrollX": "200px",
+              "scrollCollapse": true,
+              "paging": true,
+              "ajax": "/login/getUsuarios",
+              "columns": [
+                  { "data": "nombre_usuario" },
+                  { "defaultContent": "<button type='button' class='editarUsuario btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditarUsuario'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarUsuario btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarUsuario' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+              ],
+              "language": idioma_espanol
+          });
+         
+          obtenerCamposInscripciones("#TablaUsuario tbody", listadoUsuarios);
+          eliminarUsuario("#TablaUsuario tbody", listadoUsuarios);
+        }
+
+
+      /* Funcion para traer los datos de la inscripcion */
+        var obtenerCamposInscripciones = function (tbody, table) {
+          $(tbody).on("click", "button.editarUsuario", function () {
+            /* La funcion parents trae los datos de las columnas anteriores a la misma */
+            var data = table.row($(this).parents("tr")).data();
+            /* Obtener los valores de los campos y agregarlos al formulario */
+            var id_usuario = $("#idUsuarioE").val(data.id_usuario),
+             nombre_usuario = $("#nombreUsuarioE").val(data.nombre_usuario),
+             contrasena_usuario = $("#contrasenaUsuarioE").val(data.contrasena_usuario);
+
+            /* Abrir modal */
+            $("#modalEditarUsuario").toggleClass("show");
+
+          });
+
+        }
+
+      /* Funcion para eliminar la inscripciones */
+      var eliminarUsuario = function (tbody, table) {
+              $(tbody).on("click", "button.eliminarUsuario", function () {
+                  /* La funcion parents trae los datos de las columnas anteriores a la misma */
+                  var data = table.row($(this).parents("tr")).data();
+                  /* Obtener los valores de los campos y agregarlos al formulario */
+                  var  id_usuario = $("#idUsuarioEliminar").val(data.id_usuario);
+
+                  /* Abrir modal */
+                  $("#modalEliminarUsuario").toggleClass("show");
+              });
+      }
+
+      var idioma_espanol = {
+              "sProcessing": "Procesando...",
+              "sLengthMenu": "Mostrar _MENU_ registros",
+              "sZeroRecords": "No se encontraron resultados",
+              "sEmptyTable": "Ningún dato disponible en esta tabla",
+              "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+              "sInfoPostFix": "",
+              "sSearch": "Buscar:",
+              "sUrl": "",
+              "sInfoThousands": ",",
+              "sLoadingRecords": "Cargando...",
+              "oPaginate": {
+                  "sFirst": "Primero",
+                  "sLast": "Último",
+                  "sNext": "Siguiente",
+                  "sPrevious": "Anterior"
+              },
+              "oAria": {
+                  "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                  "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+              }
+      }
+      
+      TablaUsuario();
+
+
+
+  });
+
+    </script>
+
+
+
+{% endblock %}

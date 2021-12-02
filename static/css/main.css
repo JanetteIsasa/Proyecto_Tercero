@@ -1,0 +1,244 @@
+
+.imgTablaClientes{
+  
+  width: 65px;
+  height: 65px;
+  float: left;
+  padding: 5px;
+  
+}
+
+.titulo {
+  font-family: 'Mitr', sans-serif;
+  text-align: center;
+  padding: 3px;
+  font-size: xx-large;
+  font-weight: bold 500;
+  border-bottom: 1px solid white;
+}
+
+.imgTitulo{
+  height: 35px;
+  width: 35px;
+}
+
+
+.parrafosMenu{
+  font-size: small;
+}
+.equipo-img{
+  margin-top: -50px;
+  margin-bottom: 25px;
+  
+}
+.equipo-img img{
+  height: 70px;
+  width: 70px;
+  box-shadow: 0px 0px 5px gray;
+  border-radius: 50px;
+}
+
+/*-------------Tabla Entrenadores---------------*/
+.tablaEntrenadores{
+  margin-top: 50px;
+}
+
+
+
+
+ul .pagination{
+  font-size: 14px;
+}
+
+
+/*Tamaño del footer en datatable*/
+div#idDataTable_length.dataTables_length{
+  font-size: 14px;
+  height: 35px;
+  width: 610px;
+  float: left;
+}
+
+div#idDataTable_info.dataTables_info{
+  font-size: 14px;
+  height: 35px;
+  width: 500px;
+  float: left;
+  padding-top: 0px;
+}
+
+li.paginate_button.page-item.active{
+  font-size: 14px;
+}
+
+li#idDataTable_previous.paginate_button.page-item.previous.disabled{
+  font-size: 14px;
+}
+li#idDataTable_next.paginate_button.page-item.next.disabled{
+  font-size: 14px;
+}
+
+div#idDataTable_filter.dataTables_filter{
+  height: 35px;
+  width: 400px;
+  float: right;
+}
+
+
+/*--------------------------------------*/
+
+/*Para acomodar y poner los iconitos en los inputs del Form Entrenadores*/
+.form-group input{
+  height: 42px;
+  font-size: 15px;
+  padding-left: 40px;
+  border-radius: 5px;
+}
+/*Para poner los iconitos en los inputs del Form Entrenadores y Clientes*/
+.form-group::before{
+  font-family: "Font Awesome\ 5 Free";
+  position: absolute;
+  left: 25px;
+  font-size: 17px;
+  padding-top:8px;
+  
+}
+.form-group#nom-grupo::before{
+  content: "\f007";
+}
+
+.form-group#cedula-grupo::before{
+  content: "\f2c2";
+}
+.form-group#email-grupo::before{
+  content: "\f0e0";
+}
+
+.form-group#direccion-grupo::before{
+  content: "\f3c5";
+}
+
+.form-group#tel-grupo::before{
+  content: "\f095";
+}
+.form-group#calendario-grupo::before{
+  content: "\f073"; 
+}
+.form-group#lesion-grupo::before{
+  content: "\f728"; 
+}
+.form-group#traslado-grupo::before{
+  content: "\f0f9"; 
+}
+.form-group#carnet-grupo::before{
+  content: "\f2bb"; 
+}
+.form-group#obra_social-grupo::before{
+  content: "\f47e"; 
+}
+.form-group#contacto_urgencia-grupo::before{
+  content: "\f0f0"; 
+}
+.form-group#horario-grupo::before{
+  content: "\f017"; 
+}
+.form-group#peso-grupo::before{
+  content: "\f496"; 
+}
+.form-group#monto-grupo::before{
+  content: "\f53d"; 
+}
+.form-group#candado-grupo::before{
+  content: "\f023"; 
+}
+/*-----------------------------------------------------------*/
+
+
+/*
+ * Component: Small Box
+ * --------------------
+ */
+ .small-box {
+  border-radius: 2px;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.small-box > .inner {
+  padding: 10px;
+}
+.small-box > .small-box-footer {
+  position: relative;
+  text-align: center;
+  padding: 3px 0;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+.small-box > .small-box-footer:hover {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.15);
+}
+.small-box h3 {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  padding: 0;
+}
+.small-box p {
+  font-size: 15px;
+}
+.small-box p > small {
+  display: block;
+  color: #f9f9f9;
+  font-size: 13px;
+  margin-top: 5px;
+}
+.small-box h3,
+.small-box p {
+  z-index: 5;
+}
+.small-box .icon {
+  -webkit-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  z-index: 0;
+  font-size: 90px;
+  color: rgba(0, 0, 0, 0.15);
+}
+.small-box:hover {
+  text-decoration: none;
+  color: #f9f9f9;
+}
+.small-box:hover .icon {
+  font-size: 95px;
+}
+@media (max-width: 767px) {
+  .small-box {
+    text-align: center;
+  }
+  .small-box .icon {
+    display: none;
+  }
+  .small-box p {
+    font-size: 12px;
+  }
+}
+
+/*-----------------------------------------------------------*/
+/*-----------------REPORTES - TARJETAS ----------------------*/
+#tarjetasReportes div .caja1 a h5{
+  background-color: rgba(201, 195, 193, 0.905); font-weight: 400; margin-bottom: 0px; margin-top: 0.5rem; padding: 0.5rem;
+}
+#tarjetasReportes div .caja1 a{
+  background-color: rgba(158, 154, 153, 0.446); color: rgb(255, 255, 255); padding: 0px; padding-top: 0.5rem;
+}
+

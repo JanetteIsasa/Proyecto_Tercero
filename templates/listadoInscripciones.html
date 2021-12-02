@@ -1,0 +1,309 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div>
+  {% with messages = get_flashed_messages()  %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-primary" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+</div>
+
+<div class="row mx-auto">
+    <!------------------------------------------TABLA DE CLIENTES----------------------------------------->
+  <div class="col-md-12 col-sm-12 mx-auto" style="padding-top: 70px;">
+    <div class="card ">
+      <div class="card-header text-center shadow p-3 bg-white rounded d-flex">
+        <a href="http://127.0.0.1:5050/login/ClientesPorActividad" class="btn btn-sm btn-info font-weight-bold"> <img src="../static/images/flecha-izquierda.png" alt=""> Volver</a>
+        <h4 class="mx-auto">Listado de Inscripciones</h4>
+      </div>
+      <div class="card-body  ">
+        <div class="table-responsive shadow p-3 mb-5 bg-white rounded ">
+          <table class="table table-hover table-striped  text-center"  style="width: 100%; font-size: 14px;" id="TablaRegistroInscripciones">
+
+            <thead class="font-weight-bold ">
+              <tr>
+                <td>Cliente</td>
+                <td>Fecha de Pago</td>
+                <td>Fecha de Vencimiento</td>
+                <td>Monto</td>
+                <td>Mas Detalles</td>
+                <td>Acciones</td>
+
+              </tr>
+            </thead>
+            
+            <tfoot class="font-weight-bold ">
+              <tr>
+                
+               
+                <td>Cliente</td>
+                <td>Fecha de Pago</td>
+                <td>Fecha de Vencimiento</td>
+                <td>Monto</td>
+                <td>Mas Detalles</td>
+                <td>Acciones</td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+  <!-------------------------- MODAL MAS DETALLES------------------------------------->
+<div class="modal fade" id="modalMasDetalles" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Detalles</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+
+          </div>
+          <form  action="{{url_for('DetallesInscripciones')}}"  method="POST">
+              <div class="modal-body">      
+                      <input type="text" id="idInscripcionDetalles" name="id_inscripcion"  hidden>
+                      ¿Desea ver las Actividades en la que está inscripto/a?<strong data-name=""></strong>    
+              </div>
+              <div class="modal-footer">
+                  <div>
+                      <button type="submit" class="btn btn-outline-primary " >Aceptar</button>
+                  </div>
+                  <div>
+                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+                 
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!------------------------- MODAL MAS DETALLES------------------------------------->
+
+
+<!------------------------------------- MODAL EDITAR LISTADO INSCRIPCION-------------------------->
+<div class="modal fade" id="modalEditarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title text-center" id="exampleModalLabel">Editar Inscripción</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form action="{{url_for('actualizarRegistro')}}" method="POST">
+          <div hidden>
+            <div class="form-group" id="nom-grupo">
+                <input class="form-control" type="text" name="id_inscripcion" id="idInscripcionE">
+            </div>
+          </div>
+
+          
+          <label for="" class="col-form-label">Cliente</label>
+          <div class="form-group" id="nom-grupo" style="margin-bottom:0px">
+            <input class="form-control" type="text" id="clienteE" disabled>
+          </div>
+
+          <label for="" class="col-form-label">Fecha de Pago</label>
+          <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+            <input class="form-control" type="date" name="fecha_de_pago" id="fechaPagoE" required>
+          </div>
+
+          <label for="" class="col-form-label">Fecha de Vencimiento</label>
+          <div class="form-group" id="calendario-grupo" style="margin-bottom:0px">
+            <input class="form-control" type="date" name="fecha_vencimiento" id="fechaVencimientoE" required>
+          </div>
+
+          <label for="" class="col-form-label">Monto Total a Pagar</label>
+          <div class="form-group" id="monto-grupo" style="margin-bottom:0px">
+            <input class="form-control number" type="text" name="total_a_pagar" id="montoTotalE" required>
+          </div>
+       
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Actualizar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!---------------------------------- MODAL ELIMINAR INSCRIPCION ----------------------------------->
+<div class="modal fade" id="modalEliminarRegistro" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Eliminar Inscripciones</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+
+          </div>
+          <form id="frmEliminarUsuario" action="{{url_for('deleteInscripcion')}}">
+              <div class="modal-body">
+                  
+                      <input id="idInscripcionEliminar" name="idInscripcionE" hidden >
+                      ¿Está seguro de eliminar esta Inscripcion?<strong data-name=""></strong>
+
+                 
+              </div>
+              <div class="modal-footer">
+                  <div>
+                      <button type="submit" class="btn btn-outline-primary" >Aceptar</button>
+                  </div>
+                  <div>
+                      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+                 
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!----------------------------------- MODAL ELIMINAR INSCRIPCION------------------------------------->
+
+<script>
+$(document).ready(function () {
+
+      var table = $('TablaRegistroInscripciones').DataTable({
+      responsive: true
+
+      });
+    // Tabla Registro de Pesos
+    var TablaRegistroInscripciones = function () {
+        var listadoRegistros = $('#TablaRegistroInscripciones').DataTable({
+            "scrollY": "300px",
+            "scrollX": "200px",
+            "scrollCollapse": true,
+            "paging": true,
+            "ajax": "/login/getInscripcion",
+            "columns": [
+                { "data": "cliente_inscripcion" },
+                { "data": "fecha_formateado1" },
+                { "data": "fecha_formateado2"},
+                { "data": "total_pagar_inscripcion"},
+                { "defaultContent": "<button type='button' class='masDetalles btn btn-success text-center' style='font-size:11px' data-toggle='modal' data-target='#modalMasDetalles'><i class='fa fa-plus' ></i></button>	" },
+                { "defaultContent": "<button type='button' class='editarRegistro btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditarRegistro'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarRegistro btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarRegistro' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+            ],
+            "language": idioma_espanol
+        });
+        masDetalles("#TablaRegistroInscripciones tbody", listadoRegistros);
+        obtenerCamposInscripciones("#TablaRegistroInscripciones tbody", listadoRegistros);
+        eliminarModalidad("#TablaRegistroInscripciones tbody", listadoRegistros);
+      }
+
+      /* Funcion para ver mas detalles de la inscripcion*/
+      var masDetalles = function (tbody, table) {
+        $(tbody).on("click", "button.masDetalles", function () {
+          /* La funcion parents trae los datos de las columnas anteriores a la misma */
+          var data = table.row($(this).parents("tr")).data();
+          /* Obtener los valores de los campos y agregarlos al formulario */
+          var id_inscripcion= $("#idInscripcionDetalles").val(data.id_inscripcion);
+        
+          /* Abrir modal */
+          $("#modalMasDetalles").toggleClass("show");
+        });
+      }
+
+    /* Funcion para traer los datos de la inscripcion */
+    var obtenerCamposInscripciones = function (tbody, table) {
+      $(tbody).on("click", "button.editarRegistro", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+       var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+       var id_inscripcion = $("#idInscripcionE").val(data.id_inscripcion),
+          cliente_inscripcion = $("#clienteE").val(data.cliente_inscripcion),
+          fecha_de_pago_inscripcion = $("#fechaPagoE").val(data.fecha_de_pago_inscripcion),
+          fecha_de_vencimiento_inscripcion = $("#fechaVencimientoE").val(data.fecha_de_vencimiento_inscripcion),
+          total_pagar_inscripcion = $("#montoTotalE").val(data.total_pagar_inscripcion);
+         
+
+        /* Abrir modal */
+       $("#modalEditarRegistro").toggleClass("show");
+
+      });
+
+    }
+
+    /* Funcion para eliminar la inscripciones */
+    var eliminarModalidad = function (tbody, table) {
+            $(tbody).on("click", "button.eliminarRegistro", function () {
+                /* La funcion parents trae los datos de las columnas anteriores a la misma */
+                var data = table.row($(this).parents("tr")).data();
+                /* Obtener los valores de los campos y agregarlos al formulario */
+                var  id_inscripcion = $("#idInscripcionEliminar").val(data.id_inscripcion);
+
+                /* Abrir modal */
+                $("#modalEliminarModalidad").toggleClass("show");
+            });
+    }
+
+    var idioma_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+    }
+    
+    TablaRegistroInscripciones();
+
+
+
+  });
+
+  $('input.number').keyup(function(event) {
+
+    // skip for arrow keys
+    if(event.which >= 37 && event.which <= 40){
+      event.preventDefault();
+    }
+
+    $(this).val(function(index, value) {
+      return value
+        .replace(/\D/g, "")
+        .replace(/([0-9])([0-9]{0})$/, '$1')  
+        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".")
+      ;
+    });
+});
+
+
+</script>
+{% endblock %}

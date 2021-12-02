@@ -1,0 +1,625 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 100%;">
+
+  <div class="carousel-inner">
+    <div>
+      {% with messages = get_flashed_messages()  %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-primary" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+    <!-------------PRIMERA PAG DEL CAROUCEL--------------->
+    <div class="carousel-item active">
+      
+      <form action="{{url_for('crudCliente')}}" method="POST">
+        <div class="row">
+          
+          <!-----------------------------------------------TARJETA 1 (REGISTROS DE CLIENTES) ---------------------------------------------------->
+          <div class="col-md-6 col-sm-12" style="padding-left: 160px;">
+
+            <div class="card CajaClientes"
+              style="margin-left: 10px; margin-right: 20px; margin-top: 70px;padding: 5px; border-radius: 5px;">
+
+
+              <div class="card-body" style="padding: 5px;">
+                <div class="col-13 equipo-img text-center">
+                  <img src="../static/images/clientes.jpg" alt="">
+                </div>
+
+
+                <div class="formularioClientes">
+
+                  <div class="form-group" id="nom-grupo" hidden>
+                    <input class="form-control" type="text" placeholder="Nombre del Cliente"name="id_cliente" 
+                      >
+                  </div>
+
+                  <div class="form-group" id="nom-grupo">
+                    <input class="form-control" type="text" placeholder="Nombre del Cliente" name="nombre_cliente"
+                      required>
+                  </div>
+                  <div class="form-group" id="nom-grupo">
+                    <input class="form-control" type="text" placeholder="Apellido del Cliente" name="apellido_cliente"
+                      required>
+                  </div>
+                  <div class="form-group" id="calendario-grupo">
+                    <input class="form-control" type="date" name="fecha_nacimiento_cliente" required>
+                  </div>
+                  <div class="form-group" id="cedula-grupo">
+                    <input class="form-control" id="cedula" type="number" placeholder="Cédula de Identidad" name="cedula_cliente"
+                      required>
+                  </div>
+                  <div class="form-group" id="tel-grupo">
+                    <input class="form-control" id="phone" type="text" placeholder="Teléfono del Cliente" name="telefono_cliente"
+                      required>
+                  </div>
+                  <div class="form-group" id="email-grupo">
+                    <input class="form-control" id="gmail" type="email" placeholder="Email del Cliente" name="email_cliente"
+                      required>
+                  </div>
+                  <div class="form-group" id="direccion-grupo">
+                    <input class="form-control" type="text" placeholder="Dirección" name="direccion_cliente" required>
+                  </div>
+                  <div class="form-group" id="peso-grupo">
+                    <input class="form-control" type="number" step="0.01" min="0" placeholder="Peso actual" name="peso_actual_seguimiento" required>
+                  </div>
+
+
+                </div>
+
+
+              </div>
+
+              <div class="form-row mx-auto" >
+                <div>
+                  <button type="submit" class="btn btn-outline-primary mr-2">Guardar</button>
+                </div>
+                <div>
+                  <button type="reset" class="btn btn-outline-danger ">Cancelar</button>
+                </div>
+              </div>
+
+            </div>
+
+            
+
+
+          </div>
+          <!-------------------------------------------------------TARJETA 2 (FICHA MEDICA) ------------------------------------------------------------------>
+          <div class="col-md-6 col-sm-12" style="padding-right: 160px;">
+            <div class="card CajaModalidad"
+              style="margin-left: 10px; margin-right: 20px; margin-top: 70px;padding: 5px; border-radius: 5px;">
+
+
+              <div class="card-body" style="padding: 5px;">
+                <div class="col-13 equipo-img text-center">
+                  <img src="../static/images/fichaMedicaCliente.jpg" alt="">
+                </div>
+
+
+                <div>
+                  <div class="alert alert-info" role="alert">
+                    Estos datos servirán por si ocurra algun accidente dentro del local
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+
+                  <div class="form-group" id="obra_social-grupo">
+                    <input class="form-control" type="text" placeholder="Obra Social" name="obra_social_cliente">
+                  </div>
+                  <div class="form-group" id="nom-grupo">
+                    <input class="form-control" type="text" placeholder="Grupo Sanguineo"
+                      name="grupo_sanguineo_cliente">
+                  </div>
+                  <div class="form-group" id="carnet-grupo">
+                    <input class="form-control" type="number" placeholder="Carnet" name="carnet_cliente">
+                  </div>
+                  <div class="form-group" id="contacto_urgencia-grupo">
+                    <input class="form-control" type="text" placeholder="Nombre de tu contacto de Urgencia"
+                      name="contacto_urgencia_cliente">
+                  </div>
+                  <div class="form-group" id="tel-grupo">
+                    <input class="form-control" id="phone2" type="text" placeholder="Telefono de Urgencia"
+                      name="telefono_urgencia_cliente">
+                  </div>
+                  <div class="form-group" id="traslado-grupo">
+                    <input class="form-control" type="text" placeholder="Lugar de Traslado"
+                      name="lugar_traslado_cliente">
+                  </div>
+                  <div class="form-group" id="horario-grupo">
+                    <input class="form-control" type="time" placeholder="Horario del Traslado"
+                      name="horario_traslado_cliente">
+                  </div>
+                  <div class="form-group" id="lesion-grupo">
+                    <input class="form-control" type="text" placeholder="Sufre de alguna enfermedad?"
+                      name="enfermedades_cliente">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+        </div>
+
+      </form>
+    </div>
+    <!-------------SEGUNDA PAG DEL CAROUCEL--------------->
+    <div class="carousel-item">
+      <!------------------------------------------TABLA DE CLIENTES----------------------------------------->
+      <div class=" col-md-12 col-sm-12 col-lg-12 mx-auto tablaEntrenadores  ">
+       
+
+        <div class="col-md-12 col-sm-12 col-lg-12 mx-auto"> 
+          <div class="card ">
+            <div class="table-responsive">
+              <div class="card-body  text-center">
+                <table class=" table table-responsive-md table-hover table-striped " style="width: 100%; font-size: 14px;" id="TablaClientes">
+                 
+                  <thead class="font-weight-bold">
+                    <tr>
+                      
+                      <td>Nombre</td>
+                      <td>Apellido</td>
+                      <td>F.Nacimiento</td>
+                      <td>Cedula</td>
+                      <td>Telefono</td>
+                      <td>Email</td>
+                      <td>Dirección</td>
+                      <td>Ficha</td>
+                      <td>Acciones</td>
+                     
+                    </tr>
+                  </thead>
+                  
+                  <tfoot class="font-weight-bold" >
+                    <tr>
+                      
+                      <td>Nombre</td>
+                      <td>Apellido</td>
+                      <td>F.Nacimiento</td>
+                      <td>Cedula</td>
+                      <td>Telefono</td>
+                      <td>Email</td>
+                      <td>Dirección</td>
+                      <td>Ficha</td>
+                      <td>Acciones</td>
+                     
+                    </tr>
+        
+                  </tfoot>
+                </table>
+              </div>
+    
+
+            </div>
+            
+           
+          </div>
+
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+  <!-------------------------- MODAL MAS DETALLES------------------------------------->
+  <div class="modal fade" id="modalFicha" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ficha Médica</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+  
+            </div>
+            <div class="modal-body">
+              
+              <div class="form-group" id="nom-grupo" hidden>
+                <input class="form-control" type="text" placeholder="Nombre del Cliente" id="idCliente"
+                  required>
+              </div>
+              <label for="" class="col-form-label">Peso Actual</label>
+              <div class="form-group" id="peso-grupo">
+                <input class="form-control" type="number" step="0.01" min="0" placeholder="Peso actual" id="pesoActual" disabled>
+              </div>
+              <label for="" class="col-form-label">Obra Social</label>
+              <div class="form-group" id="obra_social-grupo">
+                <input class="form-control" type="text" placeholder="Obra Social" id="" name="obra_social_cliente" id="obraSocial"  disabled>
+              </div>
+              <label for="" class="col-form-label">Grupo Sanguineo</label>
+              <div class="form-group" id="nom-grupo">
+                <input class="form-control" type="number" placeholder="Grupo Sanguineo" id="grupoSanguineo" disabled
+                  name="grupo_sanguineo_cliente">
+              </div>
+              <label for="" class="col-form-label">Carnet</label>
+              <div class="form-group" id="carnet-grupo">
+                <input class="form-control" type="number" placeholder="Carnet" name="carnet_cliente" id="carnet" disabled>
+              </div>
+              <label for="" class="col-form-label">Contacto de Urgencia</label>
+              <div class="form-group" id="contacto_urgencia-grupo">
+                <input class="form-control" type="text" placeholder="Nombre de tu contacto de Urgencia" id="contactoUrgencia" disabled
+                  name="contacto_urgencia_cliente">
+              </div>
+              <label for="" class="col-form-label">Telefono de Urgencia</label>
+              <div class="form-group" id="tel-grupo">
+                <input class="form-control" id="phone2" type="text" placeholder="Telefono de Urgencia" id="telefonoUrgencia" disabled
+                  name="telefono_urgencia_cliente">
+              </div>
+              <label for="" class="col-form-label">Lugar de Traslado</label>
+              <div class="form-group" id="traslado-grupo">
+                <input class="form-control" type="text" placeholder="Lugar de Traslado" id="lugarTraslado" disabled
+                  name="lugar_traslado_cliente">
+              </div>
+              <label for="" class="col-form-label">Horario de Traslado</label>
+              <div class="form-group" id="horario-grupo">
+                <input class="form-control" type="time" placeholder="Horario del Traslado" id="horarioTraslado" disabled
+                  name="horario_traslado_cliente">
+              </div>
+              <label for="" class="col-form-label">Enfermedades o Lesiones sufridas</label>
+              <div class="form-group" id="lesion-grupo">
+                <input class="form-control" type="text" placeholder="Sufre de alguna enfermedad?" id="enfermedades" disabled
+                  name="enfermedades_cliente">
+              </div>
+
+
+                
+            </div>
+            
+
+            </div>
+           
+    </div>
+  </div>
+  <!------------------------- MODAL MAS DETALLES------------------------------------->
+
+  <!---------------------------------------- MODAL PARA EDITAR LOS DATOS DEL CLIENTE --------------------------------------->
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Editar Datos del Cliente</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form   action="{{url_for('crudCliente')}}" method="POST">
+            <div class="row">
+              
+              <!-----------------------------------------------TARJETA 1 (REGISTROS DE CLIENTES) ---------------------------------------------------->
+              <div class="col-md-6 col-sm-12" >
+    
+                <div class="card CajaClientes shadow"style=" border-radius: 5px; margin-top: 30px">
+                  <div class="card-body" style="padding: 5px;">
+                    <div class="col-13 equipo-img text-center">
+                      <img src="../static/images/clientes.jpg" alt="">
+                    </div>
+
+                    <div class="formularioClientes">
+                      <div class="form-group" id="nom-grupo" hidden>
+                        <input class="form-control" type="text" placeholder="Nombre del Cliente" id="idClienteE" name="id_cliente" 
+                          required>
+                      </div>
+
+                      <div class="form-group" id="nom-grupo">
+                        <input class="form-control" type="text" placeholder="Nombre del Cliente" name="nombre_cliente" id="nombreClienteE"
+                          required>
+                      </div>
+                      <div class="form-group" id="nom-grupo">
+                        <input class="form-control" type="text" placeholder="Apellido del Cliente" name="apellido_cliente" id="apellidoClienteE"
+                          required>
+                      </div>
+                      <div class="form-group" id="calendario-grupo">
+                        <input class="form-control" type="date" name="fecha_nacimiento_cliente" required id="fechaNacimientoE">
+                      </div>
+                      <div class="form-group" id="cedula-grupo">
+                        <input class="form-control" type="number" placeholder="Cédula de Identidad" name="cedula_cliente" id="cedulaE"
+                          required>
+                      </div>
+                      <div class="form-group" id="tel-grupo">
+                        <input class="form-control" type="text" placeholder="Teléfono del Cliente" name="telefono_cliente" id="telefonoE"
+                          required>
+                      </div>
+                      <div class="form-group" id="email-grupo"> 
+                        <input class="form-control" type="email" placeholder="Email del Cliente" name="email_cliente" id="emailE"
+                          required>
+                      </div>
+                      <div class="form-group" id="direccion-grupo">
+                        <input class="form-control" type="text" placeholder="Dirección" name="direccion_cliente"  id="direccionE" required>
+                      </div>
+                      <div class="form-group" id="peso-grupo">
+                        <input class="form-control" type="number" step="0.01" min="0" placeholder="Peso actual" name="peso_actual_seguimiento" id="pesoActualE" required>
+                      </div>
+    
+    
+                    </div>
+    
+    
+                  </div>
+    
+    
+                </div>
+    
+              </div>
+              <!-------------------------------------------------------TARJETA 2 (FICHA MEDICA) ------------------------------------------------------------------>
+              <div class="col-md-6 col-sm-12">
+                <div class="card shadow  mb-5 " style=" border-radius: 5px; margin-top: 30px;">
+    
+    
+                  <div class="card-body" style="padding: 5px; ">
+                    <div class="col-13 equipo-img text-center">
+                      <img src="../static/images/fichaMedicaCliente.jpg" alt="">
+                    </div>
+    
+    
+                    <div>
+                      <div class="form-group" id="obra_social-grupo">
+                        <input class="form-control" type="text" placeholder="Obra Social" name="obra_social_cliente" id="obraSocial">
+                      </div>
+                      <div class="form-group" id="nom-grupo">
+                        <input class="form-control" type="number" placeholder="Grupo Sanguineo" id="grupoSanguineoE"
+                          name="grupo_sanguineo_cliente">
+                      </div>
+                      <div class="form-group" id="carnet-grupo">
+                        <input class="form-control" type="text" placeholder="Carnet" name="carnet_cliente" id="carnetE">
+                      </div>
+                      <div class="form-group" id="contacto_urgencia-grupo">
+                        <input class="form-control" type="text" placeholder="Nombre de tu contacto de Urgencia" id="contactoUrgenciaE"
+                          name="contacto_urgencia_cliente">
+                      </div>
+                      <div class="form-group" id="tel-grupo">
+                        <input class="form-control" type="text" placeholder="Telefono de Urgencia" id="telefonoUrgenciaE"
+                          name="telefono_urgencia_cliente">
+                      </div>
+                      <div class="form-group" id="traslado-grupo">
+                        <input class="form-control" type="text" placeholder="Lugar de Traslado" id="lugarTrasladoE"
+                          name="lugar_traslado_cliente">
+                      </div>
+                      <div class="form-group" id="horario-grupo">
+                        <input class="form-control" type="time" placeholder="Horario del Traslado" id="horarioTrasladoE"
+                          name="horario_traslado_cliente">
+                      </div>
+                      <div class="form-group" id="lesion-grupo">
+                        <input class="form-control" type="text" placeholder="Sufre de alguna enfermedad?" id="enfermedadesE"
+                          name="enfermedades_cliente">
+                      </div>
+                    </div>
+    
+                  </div>
+    
+                </div>
+              </div>
+    
+            </div>
+
+            <div class="modal-footer">
+              <div>
+                  <button type="submit" class="btn btn-outline-primary mr-2" >Aceptar</button>
+              </div>
+              <div>
+                  <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+              </div>
+             
+          </div>
+          </form>
+        </div>
+      </div>   
+    </div>
+</div>
+
+<!---------------------------------------- MODAL PARA EDITAR LOS DATOS DEL CLIENTE --------------------------------------->
+
+<!------------------------------------------- MODAL ELIMINAR CLIENTE ----------------------------------->
+
+<div class="modal fade" id="modalEliminarCliente" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Eliminar Cliente</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                      aria-hidden="true">&times;</span></button>
+
+          </div>
+          <form id="frmEliminarUsuario" action="{{url_for('deleteClientePersonal')}}">
+              <div class="modal-body">
+                  
+                      <input type="hidden" id="idClienteEliminar" name="id_cliente_personal" >
+                      ¿Está seguro de eliminar esta cliente?<strong data-name=""></strong>
+
+                 
+              </div>
+              <div class="modal-footer">
+                  <div>
+                      <button type="submit" class="btn btn-primary mr-2" >Aceptar</button>
+                  </div>
+                  <div>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  </div>
+                 
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+<!------------------------------------------- MODAL ELIMINAR CLIENTE ----------------------------------->
+  
+<a class="carousel-control-prev" href="#carouselExampleIndicators"
+  style="background-color: rgba(191, 189, 189, 0.837);  width: 85px;
+  margin-top: 70px;
+  margin-left: 220px;" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon " aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators"
+  style="background-color: rgba(191, 189, 189, 0.905);  width: 85px; margin-top: 70px;" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+
+<script>
+  
+  $(function() {
+        $.mask.definitions['~'] = "[+-]";
+        $("#phone").mask("(9999) 999 999");
+        $("#phone2").mask("(9999) 999 999");
+       
+        $("input").blur(function() {
+            $("#info").html("Unmasked value: " + $(this).mask());
+        }).dblclick(function() {
+            $(this).unmask();
+        });
+    });
+
+    $(document).ready(function () {
+    // Tabla Clientes
+    var TablaClientes = function () {
+        var listadoClientes = $('#TablaClientes').DataTable({
+            "scrollY": "300px",
+            "scrollX": "200px",
+            "scrollCollapse": true,
+            "paging": true,
+            "ajax": "/login/getClientePersonal",
+            "columns": [
+                { "data": "nombre_cliente" },
+                { "data": "apellido_cliente" },
+                { "data": "fecha_formateado" },
+                { "data": "cedula"},
+                { "data": "telefono"},
+                { "data": "email"},
+                { "data": "direccion"},
+                { "defaultContent": "<button type='button' class='masFicha btn btn-success text-center' style='font-size:11px' data-toggle='modal' data-target='#modalFicha'><i class='fa fa-plus' ></i></button>	" },
+                { "defaultContent": "<button type='button' class='editarCliente btn btn-secondary text-center' style='font-size:11px' data-toggle='modal' data-target='#modalEditar'><i class='fa fa-user-edit' ></i></button>	<button  type='button' class='eliminarCliente btn btn-danger text-center' data-toggle='modal' data-target='#modalEliminarCliente' style='color: white; font-size:11px' ><i class='fa fa-trash '></i></button>" }
+            ],
+            "language": idioma_espanol
+        });
+        masFicha("#TablaClientes tbody", listadoClientes);
+        obtenerCamposClientes("#TablaClientes tbody", listadoClientes);
+        eliminarCliente("#TablaClientes tbody", listadoClientes);
+      }
+
+      /* Funcion para ver mas detalles de la inscripcion*/
+      var masFicha = function (tbody, table) {
+        $(tbody).on("click", "button.masFicha", function () {
+          /* La funcion parents trae los datos de las columnas anteriores a la misma */
+          var data = table.row($(this).parents("tr")).data();
+          /* Obtener los valores de los campos y agregarlos al formulario */
+          var id_cliente_personal= $("#idCliente").val(data.id_cliente_personal);
+          var peso_actual= $("#pesoActual").val(data.peso_actual);
+          var obra_social= $("#obraSocial").val(data.obra_social);
+          var grupo_sanguineo= $("#grupoSanguineo").val(data.grupo_sanguineo);
+          var carnet_cliente= $("#carnet").val(data.carnet_cliente);
+          var contacto_urgencia= $("#contactoUrgencia").val(data.contacto_urgencia);
+          var telefono_urgencia= $("#telefonoUrgencia").val(data.telefono_urgencia);
+          var lugar_traslado= $("#lugarTraslado").val(data.lugar_traslado);
+          var horario_traslado= $("#horarioTraslado").val(data.lugar_traslado);
+          var enfermedades= $("#enfermedades").val(data.enfermedades);
+         
+        
+          /* Abrir modal */
+          $("#modalFicha").toggleClass("show");
+        });
+      }
+
+    /* Funcion para traer los datos de la inscripcion */
+    var obtenerCamposClientes = function (tbody, table) {
+      $(tbody).on("click", "button.editarCliente", function () {
+        /* La funcion parents trae los datos de las columnas anteriores a la misma */
+       var data = table.row($(this).parents("tr")).data();
+        /* Obtener los valores de los campos y agregarlos al formulario */
+          var id_cliente_personal = $("#idClienteE").val(data.id_cliente_personal);
+          var nombre_cliente = $("#nombreClienteE").val(data.nombre_cliente);
+          var apellido_cliente = $("#apellidoClienteE").val(data.apellido_cliente);
+          var fecha_nacimiento = $("#fechaNacimientoE").val(data.fecha_nacimiento);
+          var cedula = $("#cedulaE").val(data.cedula);
+          var telefono = $("#telefonoE").val(data.telefono);
+          var email = $("#emailE").val(data.email);
+          var direccion = $("#direccionE").val(data.direccion);
+          var peso_actual= $("#pesoActualE").val(data.peso_actual);
+          var obra_social= $("#obraSocialE").val(data.obra_social);
+          var grupo_sanguineo= $("#grupoSanguineoE").val(data.grupo_sanguineo);
+          var carnet_cliente= $("#carnetE").val(data.carnet_cliente);
+          var contacto_urgencia= $("#contactoUrgenciaE").val(data.contacto_urgencia);
+          var telefono_urgencia= $("#telefonoUrgenciaE").val(data.telefono_urgencia);
+          var lugar_traslado= $("#lugarTrasladoE").val(data.lugar_traslado);
+          var horario_traslado= $("#horarioTrasladoE").val(data.horario_traslado);
+          var enfermedades= $("#enfermedadesE").val(data.enfermedades);
+         
+        /* Abrir modal */
+       $("#modalEditar").toggleClass("show");
+
+      });
+
+    }
+
+    /* Funcion para eliminar al Cliente */
+    var eliminarCliente = function (tbody, table) {
+            $(tbody).on("click", "button.eliminarCliente", function () {
+                /* La funcion parents trae los datos de las columnas anteriores a la misma */
+                var data = table.row($(this).parents("tr")).data();
+                /* Obtener los valores de los campos y agregarlos al formulario */
+                var  id_cliente_personal = $("#idClienteEliminar").val(data.id_cliente_personal);
+
+                /* Abrir modal */
+                $("#modalEliminarCliente").toggleClass("show");
+            });
+    }
+
+    var idioma_espanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+    }
+    
+    TablaClientes();
+
+
+
+  });
+</script>
+
+
+{% endblock %}

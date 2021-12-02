@@ -1,0 +1,130 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/AuditoriaPago.jpg); margin-top: 20px">
+          <div class="container">
+              <h1 class="display-4 text-center">Auditoria Tabla de Inscripciones</h1>
+              <p class="lead"></p>
+              <a href="http://127.0.0.1:5050/login/index" class="btn btn-sm btn-info"> <img class="" src="../static/images/casa.png" alt=""></a>
+              
+
+          </div>
+      
+      </div>
+      
+    </div>
+  
+</div>
+
+<div class="row mx-auto">  
+    <div class="col-md-12 col-sm-12 col-lg-12 mx-auto">
+        <div class="card " style="margin-top: 20px;">
+            <div class="card-body ">
+                <div class="table-responsive">
+                    <table class=" table table-responsive  table-hover table-striped " id="TablaAuditoriaInscripciones" style="width: 100%; font-size: 14px;">
+    
+                        <thead class="font-weight-bold ">
+                            <tr>
+                                <td style="width: 50px;">Usuario</td>
+                                <td style="width: 80px;">Fecha y Hora</td>
+                                <td style="width: 50px;">Tipo Accion</td>
+                                <td style="width: 100px;">Cliente</td>
+                                <td style="width: 70px;">Fecha Pago</td>
+                                <td>Fecha Pago - Auditoria</td>
+                                <td>Fecha Vencimiento</td>
+                                <td>Fecha Vencimiento - Auditoria</td>
+                                <td>Monto</td>
+                                <td>Monto - Auditoria</td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dato in auditoriaInscripciones %}
+                            <tr>
+                                <td>{{dato.0}}</td>
+                                <td>{{dato.1}}</td>
+                                <td>{{dato.2}}</td>
+                                <td>{{dato.3}}</td>
+                                <td>{{dato.4}}</td>
+                                <td>{{dato.5}}</td>
+                                <td>{{dato.6}}</td>
+                                <td>{{dato.7}}</td>
+                                <td>{{dato.8}}</td>
+                                <td>{{dato.9}}</td>
+                               
+                            </tr>
+                            {% else%}
+                            <tr >
+                                <td colspan="5"> Increíble! No hay entradas aquí hasta ahora </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+$(document).ready(function () {
+	$('#TablaAuditoriaInscripciones').DataTable({
+		language: {
+			"lengthMenu": "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar:",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Último",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior"
+			},
+			"sProcessing": "Procesando...",
+        },
+        "createdRow": function (row, data, auditoriaInscripciones) {
+            //pintar una celda
+            if (data[4] != data[5]) {
+                $('td', row).eq(5).css({
+                    'background-color': '#4BA3DD',
+                    'color': 'white',
+                });
+            }
+
+            if (data[6] != data[7]) {
+                $('td', row).eq(7).css({
+                    'background-color': '#4BA3DD',
+                    'color': 'white',
+                });
+
+            }
+
+            if (data[8] != data[9]) {
+                $('td', row).eq(9).css({
+                    'background-color': '#4BA3DD',
+                    'color': 'white',
+                });
+
+            }
+
+            if (data[2] == "Eliminado") {
+                $('td', row).css({
+                    'background-color': '#ff5252',
+                    'color': 'white',
+                });
+
+            };
+
+        },
+    });
+});
+</script>
+
+{% endblock %}

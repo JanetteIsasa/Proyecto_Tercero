@@ -1,0 +1,175 @@
+{% extends "nuevomenu.html" %}
+{% block body %}
+<div class="col-md-12 col-sm-12 mx-auto">
+    {% with messages = get_flashed_messages()  %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-primary" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="row">
+    <div class="col-md-12">
+      <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/EstadoCliente.png); margin-top: 20px">
+          <div class="container">
+              <h1 class="display-4 text-center">Estado de Cliente</h1>
+             
+          </div>
+      </div>    
+    </div> 
+</div>
+
+<div class=" row mx-auto">
+    <div class="mx-auto col-4 col-sm-8 col-md-4" style="margin-top: 70px;">
+        <div class="card">
+            <div class="card-body">
+            
+                    <form action="{{url_for('EstadoClientes')}}" method="POST">
+                        <label for="" class="col-form-label font-weight-bold">Buscar:</label>
+                        <select class="form-control" name="tipo_estado" id="">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+
+                        <div style="margin-top: 7px;">
+                            <button type="submit" class="btn btn-outline-primary">Aceptar</button>
+                        </div>
+
+
+
+                    </form>
+
+       
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="col-md-8 col-xl-8 col-sm-8 mx-auto px-auto " style="margin-top: 70px;">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4>Clientes con Estado {{tipo}}</h4>
+            </div>
+
+            <div class="card-body">
+
+
+                <div class="table-responsive shadow p-3 mb-5 bg-white rounded">
+                    <table class=" table  table-hover table-striped" id="idDataTable" style="width: 100%; font-size: 14px;">
+                        <thead class=" font-weight-bold text-center">
+                            <tr>
+                                <td>Nombre y Apellido</td>
+                                <td> Estado</td>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for clienteA in clientesActivos %}
+                            <tr>
+                                <td class=" text-center">{{clienteA.1}} {{clienteA.2}}</td>
+                                <td class=" text-center">
+                                    <a  href="#" data-toggle="modal" data-target="#modalCambiarEstado{{clienteA.0}}"
+                                        class="btn btn-success" style="font-size: 14px;"> Cambiar Estado
+                                </a>
+
+                                </td>
+
+                            </tr>
+
+                            <!-- ----------------------------------Modal Cambiar Estado Cliente------------------------------->
+                            <div class="modal fade" id="modalCambiarEstado{{clienteA.0}}" tabindex="-1" role="dialog"
+                                aria-labelledby="modalEliminarLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Cambiar Estado</h4>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                                        </div>
+                                        <form action="{{url_for('cambioEstado')}}"  method="POST" >
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <input class="form-control" type="hidden" name="id_estado" value="{{clienteA.0}}">
+                                                  </div>
+
+                                                  <label for="" class="col-form-label">Estado del Cliente</label>
+                                                  <select class="form-control" name="cambio_estado" >
+                                                      <option value="1">Activo</option>
+                                                      <option value="0">Inactivo</option>
+                                                  </select>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Aceptar</button>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">Cancelar</button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+
+                            {% else%}
+
+                            <tr class="text-center">
+                                <td colspan="4"> Increíble! No hay entradas aquí hasta ahora </td>
+                            </tr>
+
+                            
+
+
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot class="font-weight-bold text-center">
+                            <tr>
+                                <td class=" td ">Nombre y Apellido</td>
+                                <td> Estado</td>
+                            </tr>
+
+                        </tfoot>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}
