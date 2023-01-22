@@ -8,7 +8,7 @@ Un sistema hecho para mi tesina del tercer curso de la carrera Ingeniería Infor
 - Pequeña Auditoria.
 - Encriptación de las contraseñas de usuario en la BD.
 
-![unnamed](https://user-images.githubusercontent.com/65868327/174854772-f6bc2cc3-40af-410e-bb8e-745a61c19a5b.png)
+![Captura de pantalla 2023-01-22 181010](https://user-images.githubusercontent.com/65868327/213940648-b83b66f5-6105-4bde-a0c1-41c228b6da8b.png)
 
 # install dependencies
 - pip install flask
