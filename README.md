@@ -1,5 +1,5 @@
 # Sistema Web para Issamar Fitness
-Un sistema hecho para mi tesina del tercer curso de la carrera Ingeniería Informática, la cual ofrece varias funcionalidades como:
+Un sistema hecho para mi tesina del tercer año de la carrera Ingeniería Informática, la cual ofrece varias funcionalidades como:
 
 - Gestión de Usuarios, Entrenadores, Modalidades, Actividades, Clientes, Pagos.
 - Seguimiento personalizado. 
