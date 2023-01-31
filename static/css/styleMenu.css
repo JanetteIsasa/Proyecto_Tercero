@@ -13,13 +13,12 @@
 body {
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
   color: var(--grey);
 }
 
 /*Menu lateral*/
 #sidebar-container {
-  width: 30%;
+  width: 25%;
   min-height: 100vh;
   background-color: var(--white);
 }
@@ -67,59 +66,75 @@ body {
 
 /*Items del Menu*/
 #sidebar-container .group2{
-  height: 50%;
+  width: 100%;
+  padding: 1rem 2rem;
 }
 
-/*Perfil*/
-#sidebar-container .group3{
-  height: 30%;
+.group2 ul li a{
+  color: var(--itemsColors);
+  width: 100%;
+}
+.group2 ul li{
+  color: var(--itemsColors);
+  height: 2.5rem;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+
 }
 
-a:hover {
+ul{
+  list-style: none;
+  padding-left: 0px;
+  margin-bottom: 0;
+}
+
+#sidebar-container ul a i{
+margin-right: 16px;
+}
+
+.group2 ul li:hover{
+  background-color: var(--blue-claro);
+  color: var(--white);
+
+}
+
+.group2 ul a:hover{
   text-decoration: none;
 }
 
 
-.bg-mix { background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0); }
-
-.btn-primary {
-  background-color: var(--primary);
-  border: 0;
+/*Perfil*/
+#sidebar-container .group3{
+  border-top: 2px solid var(--stroke);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 2rem;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary);
+.group3 img{
+  margin-right: 10px;
+}
+
+.group3 p{
+  padding: 0 5px;
+  margin: 0;
+}
+
+.group3 .name_user{
+  font-weight: 600;
+  font-size: 20;
+  color: var(--blue-oscuro);
+}
+
+.group3 .rol_user{
+  font-weight: 500;
+  font-size: 16;
+  color: var(--itemsColors);
 }
 
 
-
-
-#sidebar-container ul a{
-  display: block;
-  height: 100%;
-  width: 100%;
-  line-height: 40px;
-  font-size: 14px;
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
-  box-sizing: border-box;
-  border-bottom: 1px solid black;
-  border-top: 1px solid rgba(255,255,255,.1);
- 
-}
-
-ul{
-    list-style: none;
-      padding-left: 0px;
-}
-
-#sidebar-container ul a i{
-  margin-right: 16px;
-}
-#sidebar-container ul a svg{
-    margin-right: 16px;
-  }
 
 
 
