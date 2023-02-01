@@ -3,28 +3,26 @@
 <div class="row" style="padding: 5px;">
     <div class="col-lg-3 col-xs-6">
 
-        <div class="small-box bg-aqua" style="background-color:#EC407A">
+        <div class="small-box bg-aqua" style="background-color:#ffffff">
           {% if contador_clientes %}
           <div class="inner">
-            
-            <h3>{{contador_clientes}}</h3>
-      
-            <p>Clientes</p>
-          
-          </div>
-          
-          <div class="icon">
-            
-            <i class="icon ion-person-stalker"></i>
-          
-          </div>
-          {% endif %}
+            <div class="icon-left">
+              <i class="fa-solid fa-people-line"></i>
+            </div>
 
-          <a href="http://127.0.0.1:5050/login/ClientePersonal" class="small-box-footer">
-            
-            Más info <i class="fa fa-arrow-circle-right"></i>
+            <div class="icon-right">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
           
-          </a>
+          </div>
+
+          <div class="text-count">
+            <p>Clientes</p>
+            <h3>{{contador_clientes}}<span>/total</span></h3>  
+          </div>
+          
+
+          {% endif %}
       
         </div>
       
