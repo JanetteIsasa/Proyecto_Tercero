@@ -94,7 +94,7 @@ ul{
   border-bottom: 1px solid var(--strokeItems);
 }
 
-#sidebar-container ul a i{
+#sidebar-container ul a svg{
 margin-right: 16px;
 }
 
