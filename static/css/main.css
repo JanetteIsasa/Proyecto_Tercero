@@ -9,6 +9,100 @@
 }
 
 
+/*
+ * Component: Small Box
+ * --------------------
+ */
+ .small-box {
+  border-radius: 20px;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  padding: 1rem 1rem 2rem 1rem;
+  background-color: var(--white);
+}
+.small-box > .inner {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  
+}
+
+.small-box > .inner .icon-left{
+  width: 35px;
+  height: 35px;
+  background-color: var(--blue-claro);
+  color: var(--white);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.small-box > .inner .icon-right{
+  color: var(--itemsColors);
+}
+
+.small-box > .text-count {
+  height: 4rem;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.4);
+    margin-top: 1rem;
+  }
+
+
+.small-box h3 {
+  font-size: 30px;
+  font-weight: 600;
+  margin: 0px;
+  white-space: nowrap;
+  padding: 0;
+}
+.small-box h3 span{
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  white-space: nowrap;
+  padding: 0;
+  color: var(--itemsColors);
+}
+.small-box p {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0px;
+}
+
+
+.small-box h3,
+.small-box p {
+  z-index: 5;
+}
+
+#deudoresIndex .table tr th {
+  color: rgba(197, 197, 197, 1);
+  font-weight: 600;
+  border: 0;
+}
+
+#deudoresIndex .table tr td {
+  color: var(--blue-oscuro);
+  font-size: small;
+  font-weight: 600;
+  border-bottom: 1px solid var(--strokeItems);
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
+
+@media (max-width: 767px) {
+  
+}
+
+/*-----------------------------------------------------------*/
+
 .imgTablaClientes{
   
   width: 65px;
@@ -163,104 +257,6 @@ div#idDataTable_filter.dataTables_filter{
 }
 /*-----------------------------------------------------------*/
 
-
-/*
- * Component: Small Box
- * --------------------
- */
- .small-box {
-  border-radius: 20px;
-  position: relative;
-  display: block;
-  margin-bottom: 20px;
-  padding: 1rem 1rem 2rem 1rem;
-}
-.small-box > .inner {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-  
-}
-
-.small-box > .inner .icon-left{
-  width: 35px;
-  height: 35px;
-  background-color: var(--blue-claro);
-  color: var(--white);
-  padding: 5px;
-  border-radius: 10px;
-}
-
-.small-box > .inner .icon-right{
-  color: var(--itemsColors);
-}
-
-.small-box > .text-count {
-  height: 4rem;
-    border-bottom: 3px solid rgba(0, 0, 0, 0.4);
-    margin-top: 1rem;
-  }
-
-
-
-.small-box > .small-box-footer {
-  position: relative;
-  text-align: center;
-  padding: 3px 0;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.8);
-  display: block;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-}
-.small-box > .small-box-footer:hover {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.15);
-}
-.small-box h3 {
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-size: 30px;
-  font-weight: 500;
-  margin: 0px;
-  white-space: nowrap;
-  padding: 0;
-}
-.small-box h3 span{
-  font-size: 12px;
-  font-weight: 500;
-  margin: 0 0 10px 0;
-  white-space: nowrap;
-  padding: 0;
-}
-.small-box p {
-  margin: 0px;
-}
-.small-box p > small {
-  display: block;
-  color: #f9f9f9;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-.small-box h3,
-.small-box p {
-  z-index: 5;
-}
-
-@media (max-width: 767px) {
-  .small-box {
-    text-align: center;
-  }
-  .small-box .icon {
-    display: none;
-  }
-  .small-box p {
-    font-size: 12px;
-  }
-}
-
-/*-----------------------------------------------------------*/
 /*-----------------REPORTES - TARJETAS ----------------------*/
 #tarjetasReportes div .caja1 a h5{
   background-color: rgba(201, 195, 193, 0.905); font-weight: 400; margin-bottom: 0px; margin-top: 0.5rem; padding: 0.5rem;

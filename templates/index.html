@@ -1,145 +1,193 @@
 {% extends "nuevomenu.html" %}
 {% block body %}
-<div class="row" style="padding: 5px;">
-    <div class="col-lg-3 col-xs-6">
 
+<div class="row">
+  <!--Columna Izquierda -->
+  <div class="col-lg-8 col-md-12">
+    <!-- 1ra Fila de Small-Box -->
+    <div class="row p-2">
+
+      <!-- Box Clientes -->
+      <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="small-box bg-aqua" style="background-color:#ffffff">
           {% if contador_clientes %}
           <div class="inner">
             <div class="icon-left">
               <i class="fa-solid fa-people-line"></i>
             </div>
-
             <div class="icon-right">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
-          
           </div>
-
+    
           <div class="text-count">
             <p>Clientes</p>
-            <h3>{{contador_clientes}}<span>/total</span></h3>  
+            <h3>{{contador_clientes}}<span>/total</span></h3>
           </div>
-          
-
+  
           {% endif %}
-      
         </div>
-      
       </div>
-      
-      <div class="col-lg-3 col-xs-6" > 
-      
-        <div class="small-box" style="background-color: violet;">
-          
+    
+      <!-- Box Reportes -->
+      <div class="col-lg-4 col-md-6 col-xs-12">
+        <div class="small-box">
           <div class="inner">
-          
-            <h3>5</h3>
-      
+            <div class="icon-left" style="background-color: rgba(243, 120, 35, 0.8);">
+              <i class="fa-solid fa-people-line"></i>
+            </div>
+            <div class="icon-right">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+          </div>
+    
+          <div class="text-count">
             <p>Reportes</p>
-          
+            <h3>5<span>/total</span></h3>
           </div>
-          
-          <div class="icon">
-          
-            <i class="ion-stats-bars"></i>
-          
-          </div>
-          
-          <a href="http://127.0.0.1:5050/login/Reportes" class="small-box-footer">
-            
-            Más info <i class="fa fa-arrow-circle-right"></i>
-          
-          </a>
-      
         </div>
-      
       </div>
-      
-      <div class="col-lg-3 col-xs-6">
-      
-        <div class="small-box " style="background-color: cornflowerblue;">
-          {% if cant_modalidades %}
+    
+      <!-- Box Pagos -->
+      <div class="col-lg-4 col-md-6 col-xs-12">
+        <div class="small-box">
           <div class="inner">
-          
-            <h3>{{cant_modalidades}}</h3>
-      
-            <p>Modalidades</p>
-        
+            <div class="icon-left" style="background-color: rgba(56, 152, 107, 0.9);">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+    
+            <div class="icon-right">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+    
           </div>
-          
-          <div class="icon">
-          
-            <i class="fas fa-dumbbell" style="font-size: 70px;"></i>
-          
-          </div>
-          {% endif %}
-
-          <a href="http://127.0.0.1:5050/login/ModalidadInterfaz" class="small-box-footer">
-      
-            Más info <i class="fa fa-arrow-circle-right"></i>
-      
-          </a>
-      
-        </div>
-      
-      </div>
-      
-      <div class="col-lg-3 col-xs-6">
-      
-        <div class="small-box " style="background-color:#EC7063 ">
-        
-          <div class="inner">
-          
-            <h3>{{cant_pagos}}</h3>
-      
+    
+          <div class="text-count">
             <p>Pagos</p>
-          
+            <h3>{{cant_pagos}}<span>/total</span></h3>
           </div>
-          
-          <div class="icon">
-            
-            <i class="fa fa-calculator" style="font-size: 75px;"></i>
-          
-          </div>
-          
-          <a href="http://127.0.0.1:5050/login/Pagos" class="small-box-footer">
-            
-            Más info <i class="fa fa-arrow-circle-right"></i>
-          
-          </a>
-      
         </div>
-      
       </div>
     </div>
 
-    
-    <div class="row mx-auto">
-      <div class="col-md-12">
-        <div class="jumbotron bg-cover text-white" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url(../static/images/reporteFichaMedica.jpg); background-repeat: no-repeat; margin-top: 20px">
-            <div class="container">
-                <h2 class="display-4 text-center">AUDITORIAS</h2> 
-                <p class="lead"></p>
-                <hr class="my-2">
-                <p style="font-size: 27px;">Auditoria - Tabla Pagos</p>
-                <a href="http://127.0.0.1:5050/login/AuditoriaPagos" class="btn btn-sm btn-info font-weight-bold"> ENTRAR <img class="" src="../static/images/flecha-derecha.png" alt=""></a>
-                <p class="lead"></p>
-                <hr class="my-2">
-                <p style="font-size: 27px;">Auditoria - Tabla Inscripciones</p>
-                <a href="http://127.0.0.1:5050/login/AuditoriaInscripciones" class="btn btn-sm btn-info font-weight-bold"> ENTRAR <img class="" src="../static/images/flecha-derecha.png" alt=""></a>
-               
+    <!-- 2da Fila de Otras cajas -->
+    <div class="row">
+      <!-- Box Pagos -->
+      <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="small-box">
+          <div class="inner">
+            <div class="icon-left" style="background-color: rgba(56, 152, 107, 0.9);">
+              <i class="fa-solid fa-sack-dollar"></i>
             </div>
-        
+    
+            <div class="icon-right">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+    
+          </div>
+  
         </div>
-        
+      </div>
+
+      <div class="col-lg-6 col-md-6  col-xs-12">
+        <div class="small-box">
+          <div class="inner">
+            <div class="icon-left" style="background-color: rgba(56, 152, 107, 0.9);">
+              <i class="fa-solid fa-sack-dollar"></i>
+            </div>
+    
+            <div class="icon-right">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+    
+          </div>
+  
+        </div>
       </div>
     
-    </div> 
+    </div>
+  </div>
 
+  <!-- Columna Derecha-->
+  <div class="col-lg-4 p-2">
+    <!-- Box Reportes -->
+    <div class="col-lg-12 col-xs-6">
+      <div class="small-box pb-0 h-75">
+        <div class="inner">
+          <div class="icon-left" style="background-color: rgba(252, 208, 55, 1);">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="icon-right">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+        </div>
+
+        <p class="text-center p-2">Personas deudoras</p> 
+  
+        <div class="table-responsive my-custom-scrollbar .table-wrapper-scroll-y " id="deudoresIndex">
+          <table class="table table-sm">
+            
+            <thead>
+              <tr>
+                <th >Venc.</th>
+                <th >Nombre</th>
+                <th >Cant/Dias</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+              <tr>
+                <td>1/03/2000</td>
+                <td>Patricia Valdez</td>
+                <td class="text-center">14</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="pb-3" style="color: rgba(197, 197, 197, 1); font-size: medium ;">Total: 8 personas</p>
+      </div>
+
+    </div>
     
-
+  </div>
 </div>
+
+
 
 
 
