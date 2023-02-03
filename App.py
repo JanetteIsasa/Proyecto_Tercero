@@ -110,7 +110,7 @@ def AgregarUsuario():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
-        return render_template('agregarUsuarios.html', user = user)
+        return render_template('Usuarios/agregarUsuarios.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -232,7 +232,7 @@ def Entrenador():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
-        return render_template('entrenador.html', user = user)
+        return render_template('Entrenadores/entrenador.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -345,7 +345,7 @@ def ModalidadInterfaz():
     # Checkea si hay un inicio de sesion
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
-        return render_template('modalidad.html', user = user)
+        return render_template('Modalidades/modalidad.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -455,7 +455,7 @@ def ClientePersonal():
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
 
-        return render_template('clientePersonal.html', user = user)
+        return render_template('Clientes/clientePersonal.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -627,7 +627,7 @@ def Actividades():
         entrenador = cur.fetchall()
         cur.close()
         
-        return render_template('actividades.html', modalidades = modalidad, entrenadores = entrenador, user= user)
+        return render_template('Actividades/actividades.html', modalidades = modalidad, entrenadores = entrenador, user= user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))  
@@ -735,7 +735,7 @@ def RegistroPesos():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:   
         user = session['nombreUsuario'].capitalize()
-        return render_template('registroPesos.html', user = user)
+        return render_template('Seguimiento/registroPesos.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
@@ -882,7 +882,7 @@ def RegistroEntrada():
         modalidad = cur.fetchall()
         cur.close()
 
-        return render_template('registroEntrada.html', modalidades = modalidad, user = user)
+        return render_template('EntradaGym/registroEntrada.html', modalidades = modalidad, user = user)
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))  
 
@@ -995,7 +995,7 @@ def EstadoClientes():
             cur.close()
             tipo = "Inactivo"
             
-        return render_template('estadoCliente.html', clientesActivos = cliente, user = user, tipo = tipo)
+        return render_template('Estados/estadoCliente.html', clientesActivos = cliente, user = user, tipo = tipo)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
@@ -1058,7 +1058,7 @@ def ConsultaDeAvances():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
-        return render_template('consultasDeAvances.html',user = user)
+        return render_template('Seguimiento/consultasDeAvances.html',user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1076,7 +1076,7 @@ def BuscarAvanceCliente():
        
         cur.close()
 
-        return render_template('consultasDeAvances.html', datos = avances)
+        return render_template('Seguimiento/consultasDeAvances.html', datos = avances)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1097,7 +1097,7 @@ def ClientesPorActividad():
         data = cur.fetchall()
         cur.close()
 
-        return render_template('clientesPorActividad.html', actividades = data, user = user)
+        return render_template('Inscripciones/clientesPorActividad.html', actividades = data, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1164,7 +1164,7 @@ def ListadoInscripciones():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:   
         user = session['nombreUsuario'].capitalize() 
-        return render_template('listadoInscripciones.html', user = user)
+        return render_template('Inscripciones/listadoInscripciones.html', user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
@@ -1207,7 +1207,7 @@ def actualizarRegistro():
         mysql.get_db().commit()
         flash('La Inscripcion ha sido actualizado satisfactoriamente')
 
-        return render_template('listadoInscripciones.html')
+        return render_template('Inscripciones/listadoInscripciones.html')
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
@@ -1284,7 +1284,7 @@ def DetallesInscripciones():
         actividades_inscriptas = cur.fetchall()
         cur.close()
 
-        return render_template('detallesInscripciones.html' , actividades = actividades_inscriptas,  cantidad_y_cliente = contador_y_nombre, user = user)
+        return render_template('Incripciones/detallesInscripciones.html' , actividades = actividades_inscriptas,  cantidad_y_cliente = contador_y_nombre, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
@@ -1302,7 +1302,7 @@ def Reportes():
         cliente_personal = cur.fetchall()
         cur.close()
 
-        return render_template('reportes.html', cliente_personal = cliente_personal, user = user)
+        return render_template('Reportes/reportes.html', cliente_personal = cliente_personal, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1319,7 +1319,7 @@ def reporteCliente():
         cliente_personal = cur.fetchall()
         cur.close()
 
-        return render_template('reporteCliente.html', cliente_personal = cliente_personal, user = user)
+        return render_template('Reportes/reporteCliente.html', cliente_personal = cliente_personal, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1336,7 +1336,7 @@ def reporteClienteFichaMedica():
         cliente = cur.fetchall()
         cur.close()
 
-        return render_template('reporteClienteFichaMedica.html', cliente_personal = cliente, user = user)
+        return render_template('Reportes/reporteClienteFichaMedica.html', cliente_personal = cliente, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1352,7 +1352,7 @@ def reporteRegistroDePesos():
         registros = cur.fetchall()
         cur.close()
 
-        return render_template('reporteRegistroDePesos.html', registrosPesos = registros)
+        return render_template('Reportes/reporteRegistroDePesos.html', registrosPesos = registros)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1384,7 +1384,7 @@ def reportesClientesActividades():
             datos = cur.fetchall()
             cur.close()
 
-        return render_template('reporteClientes-Actividades.html', datos = datos, actividades = actividades, user = user) 
+        return render_template('Reportes/reporteClientes-Actividades.html', datos = datos, actividades = actividades, user = user) 
     
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1418,7 +1418,7 @@ def reportePagos():
             pagos = cur.fetchall()
             cur.close()
 
-        return render_template('reportePagos.html', pagos = pagos, suma = suma, user = user) 
+        return render_template('Reportes/reportePagos.html', pagos = pagos, suma = suma, user = user) 
     
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1428,7 +1428,7 @@ def Pagos():
      # Checkea si hay un inicio de sesion
     if 'loggedin' in session:
         user = session['nombreUsuario'].capitalize()
-        return render_template('Pagos.html', user=user)
+        return render_template('Pagos/Pagos.html', user=user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1466,7 +1466,7 @@ def pagarCuotas():
  
             cur.close()
      
-        return render_template('pagarCuotas.html', user=user, datos = datos, nombre = nombre, idCliente = id_cliente)
+        return render_template('Pagos/pagarCuotas.html', user=user, datos = datos, nombre = nombre, idCliente = id_cliente)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1497,7 +1497,7 @@ def guardarPago():
             
             flash('Pago registrado satisfactoriament')
 
-        return render_template('Pagos.html')
+        return render_template('Pagos/Pagos.html')
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1638,7 +1638,7 @@ def EstadoPago():
             datos = cur.fetchall()
             cur.close()
  
-        return render_template('estadoPago.html', datos = datos, user = user)
+        return render_template('Estados/estadoPago.html', datos = datos, user = user)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login')) 
