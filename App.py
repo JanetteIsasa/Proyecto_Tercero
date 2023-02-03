@@ -1654,7 +1654,7 @@ def AuditoriaPagos():
         cur.execute("SELECT DISTINCT auditoria_pago.usuario, DATE_FORMAT(auditoria_pago.fecha_hora, '%d-%m-%Y' ' ' '%H:%i:%s'), auditoria_pago.tipo_accion , CONCAT(cliente_personal.nombre_cliente,' ', cliente_personal.apellido_cliente), DATE_FORMAT(inscripcion.fecha_de_pago, '%d-%m-%Y'), inscripcion.fecha_de_pago, DATE_FORMAT(inscripcion.fecha_de_vencimiento, '%d-%m-%Y') , inscripcion.fecha_de_vencimiento, REPLACE(FORMAT(inscripcion.total_a_pagar,'#,#,,', 'es-ES'), ',', '.') FROM inscripcion, cliente_personal, detalle_inscripcion, auditoria_pago, pagos WHERE cliente_personal.id_cliente_personal = detalle_inscripcion.id_cliente_personal AND inscripcion.id_inscripcion = detalle_inscripcion.id_inscripcion AND auditoria_pago.id_pago = pagos.id_pago")
         auditoriaPagos = cur.fetchall()
         cur.close()
-        return render_template('auditoria_pago.html', user=user, auditoriaPagos = auditoriaPagos)
+        return render_template('Auditorias/auditoria_pago.html', user=user, auditoriaPagos = auditoriaPagos)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))
@@ -1669,7 +1669,7 @@ def AuditoriaInscripciones():
         cur.execute("SELECT usuario, DATE_FORMAT(fecha_hora, '%d-%m-%Y' ' ' '%H:%i:%s'),tipo_accion , cliente ,DATE_FORMAT(fecha_pago, '%d-%m-%Y'), DATE_FORMAT(fecha_pago_auditoria, '%d-%m-%Y'), DATE_FORMAT(fecha_vencimiento, '%d-%m-%Y') , DATE_FORMAT(fecha_vencimiento_auditoria, '%d-%m-%Y'), REPLACE(FORMAT(monto,'#,#,,', 'es-ES'), ',', '.'), REPLACE(FORMAT(monto_auditoria,'#,#,,', 'es-ES'), ',', '.') FROM auditoria_inscripciones")
         auditoriaInscripciones = cur.fetchall()
         cur.close()
-        return render_template('auditoria_inscripciones.html', user=user, auditoriaInscripciones = auditoriaInscripciones)
+        return render_template('Auditorias/auditoria_inscripciones.html', user=user, auditoriaInscripciones = auditoriaInscripciones)
 
     # Si no hay sesion iniciada se redirecciona al login
     return redirect(url_for('login'))

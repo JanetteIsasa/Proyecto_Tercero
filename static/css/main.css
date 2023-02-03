@@ -88,6 +88,25 @@
   border-bottom: 1px solid var(--strokeItems);
 }
 
+.small-box .button-auditoria{
+  display: flex;
+  justify-content: space-between;
+}
+
+.small-box .button-auditoria a{
+ width: 45%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background-color: rgba(1, 142, 196, 0.2);
+ border: 0;
+ border-radius: 10px;
+}
+
+.small-box .button-auditoria a:hover{
+  color: var(--white);
+  background-color: var(--blue-claro);
+ }
 .my-custom-scrollbar {
   position: relative;
   max-height: 400px;
