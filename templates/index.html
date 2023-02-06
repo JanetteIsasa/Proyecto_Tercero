@@ -19,16 +19,16 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
           </div>
-    
+
           <div class="text-count">
             <p>Clientes</p>
             <h3>{{contador_clientes}}<span>/total</span></h3>
           </div>
-  
+
           {% endif %}
         </div>
       </div>
-    
+
       <!-- Box Reportes -->
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="small-box">
@@ -40,14 +40,14 @@
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
           </div>
-    
+
           <div class="text-count">
             <p>Reportes</p>
             <h3>5<span>/total</span></h3>
           </div>
         </div>
       </div>
-    
+
       <!-- Box Pagos -->
       <div class="col-lg-4 col-md-6 col-xs-12">
         <div class="small-box">
@@ -55,13 +55,13 @@
             <div class="icon-left" style="background-color: rgba(56, 152, 107, 0.9);">
               <i class="fa-solid fa-sack-dollar"></i>
             </div>
-    
+
             <div class="icon-right">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
-    
+
           </div>
-    
+
           <div class="text-count">
             <p>Pagos</p>
             <h3 class="text-success">{{total_pagos}}<span>/guaranies </span></h3>
@@ -79,22 +79,24 @@
             <div class="icon-left" style="background-color: rgba(56, 152, 107, 0.9);">
               <i class="fa-solid fa-file-signature"></i>
             </div>
-    
+
             <div class="icon-right">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
           </div>
 
-          
+
           <div class="text-count">
             <p>Auditorias</p>
             <div class="button-auditoria">
-              <a href="http://127.0.0.1:5050/login/AuditoriaPagos" class="btn btn-sm">Pagos <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="http://127.0.0.1:5050/login/AuditoriaInscripciones" class="btn btn-sm">Inscripciones <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="http://127.0.0.1:5050/login/AuditoriaPagos" class="btn btn-sm">Pagos <i
+                  class="fa-solid fa-arrow-right"></i></a>
+              <a href="http://127.0.0.1:5050/login/AuditoriaInscripciones" class="btn btn-sm">Inscripciones <i
+                  class="fa-solid fa-arrow-right"></i></a>
             </div>
-           
+
           </div>
-  
+
         </div>
       </div>
 
@@ -104,25 +106,27 @@
             <div class="icon-left" style="background-color: rgba(243, 120, 35, 0.8);">
               <i class="fa-solid fa-check-to-slot"></i>
             </div>
-    
+
             <div class="icon-right">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </div>
           </div>
 
-             
+
           <div class="text-count">
             <p>Estados</p>
             <div class="button-auditoria">
-              <a href="http://127.0.0.1:5050/login/EstadoPago" class="btn btn-sm">Pagos <i class="fa-solid fa-arrow-right"></i></a>
-              <a href="http://127.0.0.1:5050/login/EstadoClientes" class="btn btn-sm">Clientes <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="http://127.0.0.1:5050/login/EstadoPago" class="btn btn-sm">Pagos <i
+                  class="fa-solid fa-arrow-right"></i></a>
+              <a href="http://127.0.0.1:5050/login/EstadoClientes" class="btn btn-sm">Clientes <i
+                  class="fa-solid fa-arrow-right"></i></a>
             </div>
-           
+
           </div>
-  
+
         </div>
       </div>
-    
+
     </div>
   </div>
 
@@ -140,68 +144,44 @@
           </div>
         </div>
 
-        <p class="text-center p-2">Personas deudoras</p> 
-  
+        <p class="text-center p-2">Personas deudoras</p>
+
         <div class="table-responsive my-custom-scrollbar .table-wrapper-scroll-y " id="deudoresIndex">
           <table class="table table-sm">
-            
+
             <thead>
               <tr>
-                <th >Venc.</th>
-                <th >Nombre</th>
-                <th >Cant/Dias</th>
+                <th>Venc.</th>
+                <th>Nombre</th>
+                <th>Cant/Dias</th>
               </tr>
             </thead>
             <tbody>
+            <tbody>
+              {% for dato in clientes_deudores %}
               <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
+
+                <td>{{dato.1}}</td>
+                <td>{{dato.0}}</td>
+                <td class="text-center">{{dato.2}}</td>
               </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
+
+              {% else%}
+              <tr class="text-center">
+                <td colspan="5">No hay entradas aquí hasta ahora </td>
               </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
-              <tr>
-                <td>1/03/2000</td>
-                <td>Patricia Valdez</td>
-                <td class="text-center">14</td>
-              </tr>
+
+              {% endfor %}
+            </tbody>
             </tbody>
           </table>
         </div>
 
-        <p class="pb-3" style="color: rgba(197, 197, 197, 1); font-size: medium ;">Total: 8 personas</p>
+        <p class="pb-3" style="color: rgba(197, 197, 197, 1); font-size: medium ;">Total: {{total_deudores}} personas</p>
       </div>
 
     </div>
-    
+
   </div>
 </div>
 

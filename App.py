@@ -83,15 +83,17 @@ def Index():
         cur.execute('SELECT COUNT(*) FROM cliente_personal')
         contador_cliente = cur.fetchone()[0]
 
-        #Extrae la cantidad de modalidades que hay
-        cur.execute('SELECT COUNT(*) FROM modalidad WHERE estado_modalidad = 1')
-        cant_modalidad = cur.fetchone()[0]
+        #Extrae los Clientes Deudores hasta la fecha 
+        cur.execute("SELECT CONCAT(cliente_personal.nombre_cliente,' ' , cliente_personal.apellido_cliente),DATE_FORMAT( pagos.pagado_hasta, '%d-%m-%Y'), DATEDIFF(CURDATE(), pagos.pagado_hasta) FROM detalle_inscripcion, inscripcion, cliente_personal, pagos WHERE detalle_inscripcion.id_inscripcion = inscripcion.id_inscripcion AND pagos.id_inscripcion = inscripcion.id_inscripcion AND detalle_inscripcion.id_cliente_personal = cliente_personal.id_cliente_personal AND inscripcion.estado_pago = 1 AND estado_eliminado_pago = 0 GROUP BY id_pago;")
+        clientes_deudores = cur.fetchall()
 
         #Extrae la cantidad de pagos que hay
         cur.execute("SELECT REPLACE(FORMAT(SUM(monto),'#,#,,', 'es-ES'), ',', '.') FROM pagos WHERE pagos.estado_eliminado_pago = 0;")
         total_pagos = cur.fetchone()[0]
         cur.close()
-        return render_template('index.html', contador_clientes = contador_cliente, cant_modalidades = cant_modalidad, total_pagos = total_pagos , user=user)
+
+        total_deudores = len(clientes_deudores);
+        return render_template('index.html', contador_clientes = contador_cliente, clientes_deudores = clientes_deudores, total_pagos = total_pagos , total_deduores = total_deudores, user=user)
 
     
 
