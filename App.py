@@ -84,16 +84,14 @@ def Index():
         contador_cliente = cur.fetchone()[0]
 
         #Extrae la cantidad de modalidades que hay
-        cur = mysql.get_db().cursor()
         cur.execute('SELECT COUNT(*) FROM modalidad WHERE estado_modalidad = 1')
         cant_modalidad = cur.fetchone()[0]
 
         #Extrae la cantidad de pagos que hay
-        cur = mysql.get_db().cursor()
-        cur.execute('SELECT COUNT(*) FROM pagos WHERE estado_eliminado_pago = 0')
-        cant_pagos = cur.fetchone()[0]
+        cur.execute("SELECT REPLACE(FORMAT(SUM(monto),'#,#,,', 'es-ES'), ',', '.') FROM pagos WHERE pagos.estado_eliminado_pago = 0;")
+        total_pagos = cur.fetchone()[0]
         cur.close()
-        return render_template('index.html', contador_clientes = contador_cliente, cant_modalidades = cant_modalidad, cant_pagos = cant_pagos , user=user)
+        return render_template('index.html', contador_clientes = contador_cliente, cant_modalidades = cant_modalidad, total_pagos = total_pagos , user=user)
 
     
 
