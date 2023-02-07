@@ -162,8 +162,17 @@ margin-right: 16px;
 }
 
 
-.button-user i{
+.button-user a{
   color: var(--itemsColors);
+}
+
+.button-user a:hover{
+  color: var(--itemsColors);
+}
+
+.button-user:hover{
+  border: 2px solid var(--strokeItems);
+  background-color: rgba(128, 128, 128, 0.536);
 }
 
 
