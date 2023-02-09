@@ -92,8 +92,6 @@ def Index():
         total_pagos = cur.fetchone()[0]
         cur.close()
 
-
-
         clientes_deudores = []
         for deudor in deudores:
             if deudores[2] > 0:
@@ -101,7 +99,7 @@ def Index():
 
         
         
-        return render_template('index.html', contador_clientes = contador_cliente, clientes_deudores = clientes_deudores, total_pagos = total_pagos , total_deduores = total_deudores, user=user)
+        return render_template('index.html', contador_clientes = contador_cliente, clientes_deudores = clientes_deudores, total_pagos = total_pagos , user=user)
 
     
 
