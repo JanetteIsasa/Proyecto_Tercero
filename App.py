@@ -95,9 +95,7 @@ def Index():
         clientes_deudores = []
         for deudor in deudores:
             if deudores[2] > 0:
-                clientes_deudores.append(deudor)
-
-        
+                clientes_deudores.append(deudor)      
         
         return render_template('index.html', contador_clientes = contador_cliente, clientes_deudores = clientes_deudores, total_pagos = total_pagos , user=user)
 
