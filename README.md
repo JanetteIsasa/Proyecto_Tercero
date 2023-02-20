@@ -8,7 +8,9 @@ Un sistema hecho para mi tesina del tercer año de la carrera Ingeniería Inform
 - Pequeña Auditoria.
 - Encriptación de las contraseñas de usuario en la BD.
 
-![Captura de pantalla 2023-01-22 181010](https://user-images.githubusercontent.com/65868327/213940648-b83b66f5-6105-4bde-a0c1-41c228b6da8b.png)
+![gym1](https://user-images.githubusercontent.com/65868327/220177139-07e8d163-da51-4a6b-b216-eb8e5ad9dfff.png)
+
+![Captura de pantalla 2023-02-06 180837](https://user-images.githubusercontent.com/65868327/220177183-a93fef38-8af4-457b-b2f4-8ca6d09ee503.png)
 
 # install dependencies
 - pip install flask
